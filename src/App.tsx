@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { CircularProgress } from '@material-ui/core';
+import TopPageContainer from 'container/TopPageContainer';
 
 const App: React.FC = () => {
   return (
     <React.Fragment>
-      <CircularProgress style={{ margin: '50%', width: 120, height: 120 }} />
+      <div style={{ margin: 40 }}>
+        <TopPageContainer />
+      </div>
     </React.Fragment>
   );
 };

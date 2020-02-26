@@ -16,6 +16,12 @@
   "rules": {
     // 適当なルール
     "react/jsx-uses-vars": 1,
-    "react/jsx-uses-react": 1
+    "react/jsx-uses-react": 1,
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ]
   }
 }
