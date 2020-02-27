@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles(() => ({
+  root: { marginBottom: 16 },
+}));
 
 type Props = {
   title: string;
@@ -8,8 +12,9 @@ type Props = {
 };
 
 export const TextInput: React.FC<Props> = props => {
+  const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       <TextField
         variant="outlined"
         label={props.title}
