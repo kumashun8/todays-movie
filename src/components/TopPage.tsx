@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TopPageHandler } from 'container/TopPageContainer';
+import { TopPageHandler } from 'containers/TopPageContainer';
 import { RadioInput } from './RadioInput';
 import { SubmitButton } from './SubmitButton';
 import { TextInput } from './TextInput';
