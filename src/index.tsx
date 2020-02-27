@@ -4,10 +4,14 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import App from './App';
 import store from 'store';
+import { ThemeProvider } from '@material-ui/core';
+import theme from 'lib/theme';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 );

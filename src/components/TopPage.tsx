@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { TopPageHandler } from 'container/TopPageContainer';
+import { TopPageHandler } from 'containers/TopPageContainer';
 import { RadioInput } from './RadioInput';
 import { SubmitButton } from './SubmitButton';
 import { TextInput } from './TextInput';
-import { FormControl } from '@material-ui/core';
+import { FormControl, Grid } from '@material-ui/core';
 import { ShowState } from './ShowState';
 
 type OwnProps = {
@@ -26,20 +26,26 @@ export const TopPage: React.FC<Props> = props => {
 
   return (
     <React.Fragment>
-      <FormControl>
-        <TextInput
-          title="入力"
-          inputValue={inputValue}
-          onChangeValue={handleOnChangeValue}
-        />
-        <RadioInput
-          title="選択"
-          selectedValue={selectedValue}
-          onChangeValue={handleOnSelectValue}
-        />
-        <SubmitButton title="Click me!" onClick={handleOnClick} />
-      </FormControl>
-      <ShowState {...{ inputValue, selectedValue, clickCount }} />
+      <Grid container justify="center">
+        <Grid item xs={4}>
+          <FormControl>
+            <TextInput
+              title="入力"
+              inputValue={inputValue}
+              onChangeValue={handleOnChangeValue}
+            />
+            <RadioInput
+              title="選択"
+              selectedValue={selectedValue}
+              onChangeValue={handleOnSelectValue}
+            />
+            <SubmitButton title="Click me!" onClick={handleOnClick} />
+          </FormControl>
+        </Grid>
+        <Grid item xs={4}>
+          <ShowState {...{ inputValue, selectedValue, clickCount }} />
+        </Grid>
+      </Grid>
     </React.Fragment>
   );
 };
