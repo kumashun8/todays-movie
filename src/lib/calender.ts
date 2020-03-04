@@ -21,7 +21,7 @@ class CalenderElement implements CalenderElementable {
 
 const daysOfMonth = [31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-class Calender implements Calenderable {
+export class Calender implements Calenderable {
   private static instance: Calender;
   private _calenderElements: Array<CalenderElement> = [];
   private constructor(readonly year: number, readonly month: number) {}
@@ -37,6 +37,18 @@ class Calender implements Calenderable {
       return 29;
     }
     return daysOfMonth[month];
+  }
+  prevMonth(): { year: number; month: number } {
+    if (this.month === 1) {
+      return { year: this.year - 1, month: 12 };
+    }
+    return { year: this.year, month: this.month - 1 };
+  }
+  nextMonth(): { year: number; month: number } {
+    if (this.month === 12) {
+      return { year: this.year + 1, month: 1 };
+    }
+    return { year: this.year, month: this.month + 1 };
   }
   createCalenderElements(
     days: number,
@@ -63,14 +75,6 @@ class Calender implements Calenderable {
 
     return this._calenderElements;
   }
-}
-
-export function createCalender(
-  year: number,
-  month: number
-): Array<CalenderElement> {
-  const calender = Calender.getInstance(year, month);
-  return calender.calenderElements;
 }
 
 export const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];

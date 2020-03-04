@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { makeStyles, Typography, StyledProps } from '@material-ui/core';
-import { createCalender, daysOfWeek } from 'lib/calender';
+import { Calender, daysOfWeek } from 'lib/calender';
 import { grey, red, indigo } from '@material-ui/core/colors';
 import { CalenderCell } from './CalenderCell';
+import { CalenderHead } from './CalenderHead';
+import { CalenderBoardHandler } from 'containers/CalenderBoardContainer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,14 +50,17 @@ const useStyles = makeStyles(theme => ({
   saturDay: { backgroundColor: indigo[100] },
 }));
 
-type Props = {
+interface OwnProps {
   year: number;
   month: number;
-};
+}
+
+type Props = OwnProps & CalenderBoardHandler;
 
 export const CalenderBoard: React.FC<Props> = props => {
   const classes = useStyles({} as StyledProps);
-  const { year, month } = props;
+  const { year, month, handleChangeMonth } = props;
+  const calender = Calender.getInstance(year, month);
   const styleOfDaysOfWeek: (day: number) => string = day => {
     const baseStyle = classes.element + ' ' + classes.dayOfWeek;
     switch (day) {
@@ -67,11 +72,18 @@ export const CalenderBoard: React.FC<Props> = props => {
         return baseStyle;
     }
   };
+  const handleChangeToPrevMonth: () => void = () => {
+    handleChangeMonth(calender.prevMonth());
+  };
+  const handleChangeToNextMonth: () => void = () => {
+    handleChangeMonth(calender.nextMonth());
+  };
 
   return (
     <div className={classes.root}>
-      <Typography variant="subtitle2">{year}</Typography>
-      <Typography variant="h1">{month}</Typography>
+      <CalenderHead
+        {...{ ...props, handleChangeToPrevMonth, handleChangeToNextMonth }}
+      />
       <div className={classes.elements + ' ' + classes.dayOfWeek}>
         {daysOfWeek.map((d, i) => (
           <div key={i} className={styleOfDaysOfWeek(i)}>
@@ -80,7 +92,7 @@ export const CalenderBoard: React.FC<Props> = props => {
         ))}
       </div>
       <div className={classes.elements}>
-        {createCalender(year, month).map((c, i) => (
+        {calender.calenderElements.map((c, i) => (
           <CalenderCell index={i} element={c} classes={classes} />
         ))}
       </div>

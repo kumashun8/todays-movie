@@ -1,6 +1,6 @@
 import { Appstate } from 'redux/store';
 import { connect } from 'react-redux';
-import { InputActions } from 'redux/actions';
+import { CalenderActions } from 'redux/actions';
 import { CalenderBoard } from 'components/CalenderBoard';
 import { Dispatch } from 'react';
 
@@ -9,11 +9,9 @@ interface StateAtProps {
   month: number;
 }
 
-export type TopPageHandler = {
-  handleOnChangeValue(value: string): void;
-  handleOnSelectValue(value: string): void;
-  handleOnClick(): void;
-};
+export interface CalenderBoardHandler {
+  handleChangeMonth(value: { year: number; month: number }): void;
+}
 
 const mapStateToProps = (appState: Appstate): StateAtProps => {
   return {
@@ -22,16 +20,10 @@ const mapStateToProps = (appState: Appstate): StateAtProps => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>): TopPageHandler => {
+const mapDispatchToProps = (dispatch: Dispatch<any>): CalenderBoardHandler => {
   return {
-    handleOnChangeValue: (value: string) => {
-      dispatch(InputActions.updateTextInputValue(value));
-    },
-    handleOnSelectValue: (value: string) => {
-      dispatch(InputActions.updateSelectedValue(value));
-    },
-    handleOnClick: () => {
-      dispatch(InputActions.updateCount());
+    handleChangeMonth: ({ year, month }) => {
+      dispatch(CalenderActions.updateCurrentMonth({ year, month }));
     },
   };
 };

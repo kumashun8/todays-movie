@@ -1,5 +1,5 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { InputActions } from 'redux/actions';
+import { InputActions, CalenderActions } from 'redux/actions';
 
 export interface State {
   inputValue: string;
@@ -26,4 +26,7 @@ export const Reducer = reducerWithInitialState(initialState)
   })
   .case(InputActions.updateCount, state => {
     return { ...state, clickCount: state.clickCount + 1 };
+  })
+  .case(CalenderActions.updateCurrentMonth, (state, { year, month }) => {
+    return { ...state, year, month };
   });

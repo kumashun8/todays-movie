@@ -7,3 +7,9 @@ export const InputActions = {
   updateSelectedValue: actionCreater<string>('UPDATE_SELECTED_VALUE'),
   updateCount: actionCreater('UPDATE_CLICK_COUNT'),
 };
+
+export const CalenderActions = {
+  updateCurrentMonth: actionCreater<{ year: number; month: number }>(
+    'UPDATE_CURRENT_MONTH'
+  ),
+};
