@@ -1,11 +1,23 @@
 import * as React from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import { createCalender } from 'lib/calender';
+import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(() => ({
   root: {
     padding: 16,
     backgroundColor: '#fafafa',
+  },
+  elements: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  element: {
+    width: 120,
+    height: 80,
+  },
+  isOut: {
+    color: grey[500],
   },
 }));
 
@@ -20,16 +32,22 @@ export const CalenderBoard: React.FC<Props> = props => {
 
   return (
     <div className={classes.root}>
-      <p>
-        Now is {year} {month}!
-      </p>
-      <ul>
-        {createCalender(year, month).map((m, i) => (
-          <li key={i} style={{ color: m.isInCurrentMonth ? 'red' : 'blue' }}>
-            {m.date}
-          </li>
+      <Typography>{year}</Typography>
+      <Typography variant="h1">{month}</Typography>
+      <div className={classes.elements}>
+        {createCalender(year, month).map((c, i) => (
+          <div
+            key={i}
+            className={
+              c.isInCurrentMonth
+                ? classes.element
+                : classes.element + ' ' + classes.isOut
+            }
+          >
+            {c.date}
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
