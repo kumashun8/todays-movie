@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core';
+import { createCalender } from 'lib/calender';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -9,16 +10,26 @@ const useStyles = makeStyles(() => ({
 }));
 
 type Props = {
-  name: string;
+  year: number;
+  month: number;
 };
 
 export const CalenderBoard: React.FC<Props> = props => {
   const classes = useStyles();
-  const { name } = props;
+  const { year, month } = props;
 
   return (
     <div className={classes.root}>
-      <p>Hello, {name}!</p>
+      <p>
+        Now is {year} {month}!
+      </p>
+      <ul>
+        {createCalender(year, month).map((m, i) => (
+          <li key={i} style={{ color: m.isInCurrentMonth ? 'red' : 'blue' }}>
+            {m.date}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

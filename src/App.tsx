@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { CalenderBoard } from 'components/CalenderBoard';
+import CalenderBoardContainer from 'containers/CalenderBoardContainer';
 
 const App: React.FC = () => {
   return (
     <React.Fragment>
       <div style={{ margin: 0, padding: '0 40px' }}>
-        <CalenderBoard name="taro" />
+        <CalenderBoardContainer />
       </div>
     </React.Fragment>
   );

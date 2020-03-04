@@ -65,10 +65,10 @@ class Calender implements Calenderable {
   }
 }
 
-export function createCalender(state: {
-  year: number;
-  month: number;
-}): Array<CalenderElement> {
-  const calender = Calender.getInstance(state.year, state.month);
+export function createCalender(
+  year: number,
+  month: number
+): Array<CalenderElement> {
+  const calender = Calender.getInstance(year, month);
   return calender.calenderElements;
 }
