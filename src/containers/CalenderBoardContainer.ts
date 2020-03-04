@@ -9,9 +9,9 @@ interface StateAtProps {
   month: number;
 }
 
-export type CalenderBoardHandler = {
+export interface CalenderBoardHandler {
   handleChangeMonth(value: { year: number; month: number }): void;
-};
+}
 
 const mapStateToProps = (appState: Appstate): StateAtProps => {
   return {
