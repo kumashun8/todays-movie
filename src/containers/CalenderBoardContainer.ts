@@ -1,8 +1,13 @@
-import { Appstate } from 'store';
-import { Dispatch } from 'react';
-import { InputActions } from 'actions';
+import { Appstate } from 'redux/store';
 import { connect } from 'react-redux';
-import { TopPage } from 'components/TopPage';
+import { InputActions } from 'redux/actions';
+import { CalenderBoard } from 'components/CalenderBoard';
+import { Dispatch } from 'react';
+
+interface StateAtProps {
+  year: number;
+  month: number;
+}
 
 export type TopPageHandler = {
   handleOnChangeValue(value: string): void;
@@ -10,17 +15,10 @@ export type TopPageHandler = {
   handleOnClick(): void;
 };
 
-type StateAtProps = {
-  inputValue: string;
-  selectedValue: string;
-  clickCount: number;
-};
-
 const mapStateToProps = (appState: Appstate): StateAtProps => {
   return {
-    inputValue: appState.state.inputValue,
-    selectedValue: appState.state.selectedValue,
-    clickCount: appState.state.clickCount,
+    year: appState.state.year,
+    month: appState.state.month,
   };
 };
 
@@ -38,4 +36,4 @@ const mapDispatchToProps = (dispatch: Dispatch<any>): TopPageHandler => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CalenderBoard);
