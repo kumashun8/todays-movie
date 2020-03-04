@@ -1,6 +1,5 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { InputActions } from 'actions';
-import { Calender } from 'lib/calender';
 
 export interface State {
   inputValue: string;
@@ -17,9 +16,6 @@ export const initialState: State = {
   year: 2020,
   month: 3,
 };
-console.log(
-  Calender.getInstance(initialState.year, initialState.month).calenderElements
-);
 
 export const Reducer = reducerWithInitialState(initialState)
   .case(InputActions.updateTextInputValue, (state, inputValue) => {

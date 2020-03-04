@@ -6,7 +6,7 @@ interface Calenderable {
   readonly year: number;
   readonly month: number;
   readonly calenderElements: Array<CalenderElement>;
-  convertMYtoStr(): string;
+  firstDay(): string;
   daysOfMonthOfYear(): number;
   createCalenderElements(
     days: number,
@@ -21,17 +21,15 @@ class CalenderElement implements CalenderElementable {
 
 const daysOfMonth = [31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-export class Calender implements Calenderable {
+class Calender implements Calenderable {
   private static instance: Calender;
   private _calenderElements: Array<CalenderElement> = [];
-  private constructor(readonly year: number, readonly month: number) {
-    console.log(year, month);
-  }
+  private constructor(readonly year: number, readonly month: number) {}
   static getInstance(year: number, month: number): Calender {
     Calender.instance = new Calender(year, month);
     return Calender.instance;
   }
-  convertMYtoStr(): string {
+  firstDay(): string {
     return String(this.month) + ' 1, ' + String(this.year);
   }
   daysOfMonthOfYear(month: number = this.month): number {
@@ -52,7 +50,7 @@ export class Calender implements Calenderable {
   get calenderElements(): Array<CalenderElement> {
     const currentDays = this.daysOfMonthOfYear();
     const beforeDays = this.daysOfMonthOfYear(this.month - 1);
-    const beforeEdgeDays = new Date(this.convertMYtoStr()).getDay();
+    const beforeEdgeDays = new Date(this.firstDay()).getDay();
     const afterEdgeDays = 42 - (beforeEdgeDays + currentDays);
 
     this._calenderElements = this.createCalenderElements(
@@ -65,4 +63,12 @@ export class Calender implements Calenderable {
 
     return this._calenderElements;
   }
+}
+
+export function createCalender(state: {
+  year: number;
+  month: number;
+}): Array<CalenderElement> {
+  const calender = Calender.getInstance(state.year, state.month);
+  return calender.calenderElements;
 }
