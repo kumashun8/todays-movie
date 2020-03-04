@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { makeStyles, Typography, StyledProps } from '@material-ui/core';
-import { createCalender, daysOfWeek } from 'lib/calender';
+import { Calender, daysOfWeek } from 'lib/calender';
 import { grey, red, indigo } from '@material-ui/core/colors';
 import { CalenderCell } from './CalenderCell';
 
@@ -56,6 +56,7 @@ type Props = {
 export const CalenderBoard: React.FC<Props> = props => {
   const classes = useStyles({} as StyledProps);
   const { year, month } = props;
+  const calender = Calender.getInstance(year, month);
   const styleOfDaysOfWeek: (day: number) => string = day => {
     const baseStyle = classes.element + ' ' + classes.dayOfWeek;
     switch (day) {
@@ -80,7 +81,7 @@ export const CalenderBoard: React.FC<Props> = props => {
         ))}
       </div>
       <div className={classes.elements}>
-        {createCalender(year, month).map((c, i) => (
+        {calender.calenderElements.map((c, i) => (
           <CalenderCell index={i} element={c} classes={classes} />
         ))}
       </div>
