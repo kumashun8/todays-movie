@@ -1,6 +1,6 @@
-import { Appstate } from 'store';
+import { Appstate } from '../redux/store';
 import { Dispatch } from 'react';
-import { InputActions } from 'actions';
+import { InputActions } from 'redux/actions';
 import { connect } from 'react-redux';
 import { TopPage } from 'components/TopPage';
 

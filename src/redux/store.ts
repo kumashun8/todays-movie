@@ -1,5 +1,5 @@
 import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
-import { State, Reducer } from 'reducer';
+import { State, Reducer } from 'redux/reducer';
 import thunk from 'redux-thunk';
 
 export type Appstate = {

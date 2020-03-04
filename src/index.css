@@ -1,17 +1,19 @@
 @font-face {
   font-family: 'Koruri';
-  src: local('Koruri'), url(./fonts/Koruri-Regular.ttf) format('truetype');
+  src: local('Koruri'),
+    url(./assets/fonts/Koruri-Regular.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Koruri';
   font-weight: 700;
-  src: local('Koruri'), url(./fonts/Koruri-Bold.ttf) format('truetype');
+  src: local('Koruri'), url(./assets/fonts/Koruri-Bold.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Audiowide';
-  src: local('Audiowide'), url(./fonts/Audiowide-Regular.ttf) format('truetype');
+  src: local('Audiowide'),
+    url(./assets/fonts/Audiowide-Regular.ttf) format('truetype');
 }
 
 body {
