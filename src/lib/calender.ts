@@ -72,3 +72,5 @@ export function createCalender(
   const calender = Calender.getInstance(year, month);
   return calender.calenderElements;
 }
+
+export const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
