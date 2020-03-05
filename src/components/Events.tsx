@@ -8,10 +8,6 @@ const useStyles = makeStyles(theme => ({
     marginTop: 2,
     padding: '0 2px',
     backgroundColor: theme.palette.secondary.light,
-    '&:nth-child(2n)': {
-      color: '#fafafa',
-      backgroundColor: theme.palette.primary.light,
-    },
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
