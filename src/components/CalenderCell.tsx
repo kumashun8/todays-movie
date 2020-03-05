@@ -1,18 +1,7 @@
 import * as React from 'react';
 import { CalenderElement } from 'lib/calenderElement';
-import { Typography, makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles(theme => ({
-  event: {
-    marginTop: 2,
-    padding: '0 2px',
-    backgroundColor: theme.palette.secondary.light,
-    '&:nth-child(2n)': {
-      color: '#fafafa',
-      backgroundColor: theme.palette.primary.light,
-    },
-  },
-}));
+import { Typography } from '@material-ui/core';
+import { Events } from './Events';
 
 type Props = {
   element: CalenderElement;
@@ -20,7 +9,6 @@ type Props = {
 };
 
 export const CalenderCell: React.FC<Props> = props => {
-  const classes2 = useStyles();
   const { element, classes } = props;
 
   return (
@@ -32,12 +20,7 @@ export const CalenderCell: React.FC<Props> = props => {
       }
     >
       <Typography>{element.date}</Typography>
-      {element.events &&
-        element.events.map((event, i) => (
-          <Typography key={i} variant="body2" className={classes2.event}>
-            {event}
-          </Typography>
-        ))}
+      {element.events.length > 0 && <Events events={element.events} />}
     </div>
   );
 };
