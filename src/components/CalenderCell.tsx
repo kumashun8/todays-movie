@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CalenderElement } from 'lib/calender';
+import { CalenderElement } from 'lib/calenderElement';
 import { Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({

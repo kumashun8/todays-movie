@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { makeStyles, Typography, StyledProps } from '@material-ui/core';
-import { Calender, DAYS_OF_WEEK } from 'lib/calender';
+import { Calender } from 'lib/calender';
 import { grey, red, indigo } from '@material-ui/core/colors';
 import { CalenderCell } from './CalenderCell';
 import { CalenderHead } from './CalenderHead';
 import { CalenderBoardHandler } from 'containers/CalenderBoardContainer';
 import { Event } from 'lib/event';
+import { DAYS_OF_WEEK } from 'lib/common';
 
 const useStyles = makeStyles(theme => ({
   root: {

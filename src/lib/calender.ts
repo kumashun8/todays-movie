@@ -1,41 +1,12 @@
 import { Event, InnerEvent } from './event';
+import { CalenderElement } from './calenderElement';
+import { DAYS_OF_MONTH } from './common';
 
-const DAYS_OF_MONTH = [31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-export const DAYS_OF_WEEK = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-
-interface CalenderElementable {
-  readonly date: number;
-  readonly isInCurrentMonth: boolean;
-  readonly events: string[];
-}
 interface Calenderable {
   readonly year: number;
   readonly month: number;
   readonly calenderElements: Array<CalenderElement>;
   readonly innerEvents: Array<InnerEvent>;
-  firstDay(): string;
-  daysOfMonthOfYear(): number;
-  createCalenderElements(
-    days: number,
-    isIn: boolean,
-    gap: number
-  ): Array<CalenderElement>;
-}
-
-export class CalenderElement implements CalenderElementable {
-  private _events: string[] = [];
-  constructor(readonly date: number, readonly isInCurrentMonth: boolean) {}
-  filterEvents(innerEvents: Array<InnerEvent>): void {
-    this.events = innerEvents
-      .filter(n => n.date === this.date)
-      .map(m => m.value);
-  }
-  get events(): string[] {
-    return this._events;
-  }
-  set events(newEvents: string[]) {
-    this._events = newEvents;
-  }
 }
 
 export class Calender implements Calenderable {
@@ -63,22 +34,17 @@ export class Calender implements Calenderable {
     return String(this.month) + ' 1, ' + String(this.year);
   }
   daysOfMonthOfYear(month: number = this.month): number {
-    if (this.year % 4 === 0 && this.month === 2) {
-      return 29;
-    }
-    return DAYS_OF_MONTH[month];
+    return this.year % 4 === 0 && this.month === 2 ? 29 : DAYS_OF_MONTH[month];
   }
   prevMonth(): { year: number; month: number } {
-    if (this.month === 1) {
-      return { year: this.year - 1, month: 12 };
-    }
-    return { year: this.year, month: this.month - 1 };
+    return this.month === 1
+      ? { year: this.year - 1, month: 12 }
+      : { year: this.year, month: this.month - 1 };
   }
   nextMonth(): { year: number; month: number } {
-    if (this.month === 12) {
-      return { year: this.year + 1, month: 1 };
-    }
-    return { year: this.year, month: this.month + 1 };
+    return this.month === 12
+      ? { year: this.year + 1, month: 1 }
+      : { year: this.year, month: this.month + 1 };
   }
   createCalenderElements(
     days: number,
