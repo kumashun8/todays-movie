@@ -1,3 +1,8 @@
+import { Event, InnerEvent } from './event';
+
+const DAYS_OF_MONTH = [31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+export const DAYS_OF_WEEK = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
 interface CalenderElementable {
   readonly date: number;
   readonly isInCurrentMonth: boolean;
@@ -7,6 +12,7 @@ interface Calenderable {
   readonly year: number;
   readonly month: number;
   readonly calenderElements: Array<CalenderElement>;
+  readonly innerEvents: Array<InnerEvent>;
   firstDay(): string;
   daysOfMonthOfYear(): number;
   createCalenderElements(
@@ -27,15 +33,26 @@ class CalenderElement implements CalenderElementable {
   }
 }
 
-const daysOfMonth = [31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
 export class Calender implements Calenderable {
   private static instance: Calender;
   private _calenderElements: Array<CalenderElement> = [];
+  private _innerEvents: Array<InnerEvent> = [];
   private constructor(readonly year: number, readonly month: number) {}
-  static getInstance(year: number, month: number): Calender {
+  static getInstance(
+    year: number,
+    month: number,
+    events: Array<Event> = []
+  ): Calender {
     Calender.instance = new Calender(year, month);
+    if (events) {
+      Calender.instance.filterEvents(events);
+    }
     return Calender.instance;
+  }
+  filterEvents(events: Array<Event>): void {
+    this.innerEvents = events
+      .filter(n => n.date[0] === this.year && n.date[1] === this.month)
+      .map(n => new InnerEvent(n.date[2], n.value));
   }
   firstDay(): string {
     return String(this.month) + ' 1, ' + String(this.year);
@@ -44,7 +61,7 @@ export class Calender implements Calenderable {
     if (this.year % 4 === 0 && this.month === 2) {
       return 29;
     }
-    return daysOfMonth[month];
+    return DAYS_OF_MONTH[month];
   }
   prevMonth(): { year: number; month: number } {
     if (this.month === 1) {
@@ -83,6 +100,10 @@ export class Calender implements Calenderable {
 
     return this._calenderElements;
   }
+  get innerEvents(): Array<InnerEvent> {
+    return this._innerEvents;
+  }
+  set innerEvents(newValue: Array<InnerEvent>) {
+    this._innerEvents = newValue;
+  }
 }
-
-export const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
