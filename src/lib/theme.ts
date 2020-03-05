@@ -97,7 +97,7 @@ theme.typography = {
     fontFamily: 'Koruri, Arial',
     whiteSpace: 'pre-line',
     fontSize: 16,
-    lineHeight: '32px',
+    marginBottom: 2,
     color: '#030303',
     [theme.breakpoints.down('xs')]: {
       fontSize: 14,
@@ -106,10 +106,10 @@ theme.typography = {
   },
   body2: {
     fontFamily: 'Koruri, Arial',
-    fontSize: 16,
+    fontSize: 12,
     color: '#030303',
     [theme.breakpoints.down('xs')]: {
-      fontSize: 14,
+      fontSize: 10,
     },
   },
   button: {

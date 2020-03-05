@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   element: {
     width: '10vw',
     height: 96,
-    padding: 4,
+    padding: 2,
     boxSizing: 'border-box',
     border: `0.5px solid ${grey[300]}`,
     borderStyle: 'none solid solid none',
