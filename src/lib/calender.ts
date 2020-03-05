@@ -25,6 +25,11 @@ interface Calenderable {
 class CalenderElement implements CalenderElementable {
   private _events: string[] = [];
   constructor(readonly date: number, readonly isInCurrentMonth: boolean) {}
+  filterEvents(innerEvents: Array<InnerEvent>): void {
+    this.events = innerEvents
+      .filter(n => n.date === this.date)
+      .map(m => m.value);
+  }
   get events(): string[] {
     return this._events;
   }
@@ -52,7 +57,7 @@ export class Calender implements Calenderable {
   filterEvents(events: Array<Event>): void {
     this.innerEvents = events
       .filter(n => n.date[0] === this.year && n.date[1] === this.month)
-      .map(n => new InnerEvent(n.date[2], n.value));
+      .map(m => new InnerEvent(m.date[2], m.value));
   }
   firstDay(): string {
     return String(this.month) + ' 1, ' + String(this.year);
@@ -80,9 +85,11 @@ export class Calender implements Calenderable {
     isIn: boolean,
     gap = 1
   ): Array<CalenderElement> {
-    return new Array(days)
-      .fill(0)
-      .map((_, i) => new CalenderElement(i + gap, isIn));
+    return new Array(days).fill(0).map((_, i) => {
+      const calenderElement = new CalenderElement(i + gap, isIn);
+      calenderElement.filterEvents(this.innerEvents);
+      return calenderElement;
+    });
   }
   get calenderElements(): Array<CalenderElement> {
     const currentDays = this.daysOfMonthOfYear();
