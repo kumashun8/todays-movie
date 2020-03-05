@@ -1,6 +1,7 @@
 interface CalenderElementable {
   readonly date: number;
   readonly isInCurrentMonth: boolean;
+  readonly events: string[];
 }
 interface Calenderable {
   readonly year: number;
@@ -16,7 +17,14 @@ interface Calenderable {
 }
 
 class CalenderElement implements CalenderElementable {
+  private _events: string[] = [];
   constructor(readonly date: number, readonly isInCurrentMonth: boolean) {}
+  get events(): string[] {
+    return this._events;
+  }
+  set events(newEvents: string[]) {
+    this._events = newEvents;
+  }
 }
 
 const daysOfMonth = [31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
