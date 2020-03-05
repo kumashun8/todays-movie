@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { CalenderElement } from 'lib/calender';
 
 type Props = {
   index: number;
-  element: { date: number; isInCurrentMonth: boolean };
+  element: CalenderElement;
   classes: Record<string, string>;
 };
 
@@ -19,6 +20,7 @@ export const CalenderCell: React.FC<Props> = props => {
       }
     >
       {element.date}
+      {element.events && <p>{element.events}</p>}
     </div>
   );
 };

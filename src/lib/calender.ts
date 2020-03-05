@@ -22,7 +22,7 @@ interface Calenderable {
   ): Array<CalenderElement>;
 }
 
-class CalenderElement implements CalenderElementable {
+export class CalenderElement implements CalenderElementable {
   private _events: string[] = [];
   constructor(readonly date: number, readonly isInCurrentMonth: boolean) {}
   filterEvents(innerEvents: Array<InnerEvent>): void {
@@ -87,7 +87,9 @@ export class Calender implements Calenderable {
   ): Array<CalenderElement> {
     return new Array(days).fill(0).map((_, i) => {
       const calenderElement = new CalenderElement(i + gap, isIn);
-      calenderElement.filterEvents(this.innerEvents);
+      if (isIn) {
+        calenderElement.filterEvents(this.innerEvents);
+      }
       return calenderElement;
     });
   }

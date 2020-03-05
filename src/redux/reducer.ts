@@ -1,5 +1,6 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { InputActions, CalenderActions } from 'redux/actions';
+import { Event } from 'lib/event';
 
 export interface State {
   inputValue: string;
@@ -7,6 +8,7 @@ export interface State {
   clickCount: number;
   year: number;
   month: number;
+  events: Array<Event>;
 }
 
 export const initialState: State = {
@@ -15,6 +17,10 @@ export const initialState: State = {
   clickCount: 0,
   year: 2020,
   month: 3,
+  events: [
+    { date: [2020, 3, 6], value: 'マッドマックス' },
+    { date: [2020, 4, 3], value: '入社式' },
+  ],
 };
 
 export const Reducer = reducerWithInitialState(initialState)

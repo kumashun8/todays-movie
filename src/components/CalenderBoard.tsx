@@ -5,6 +5,7 @@ import { grey, red, indigo } from '@material-ui/core/colors';
 import { CalenderCell } from './CalenderCell';
 import { CalenderHead } from './CalenderHead';
 import { CalenderBoardHandler } from 'containers/CalenderBoardContainer';
+import { Event } from 'lib/event';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
   },
   elements: {
-    width: 910,
+    width: '70vw',
     display: 'flex',
     flexWrap: 'wrap',
     border: `0.5px solid ${grey[300]}`,
@@ -26,15 +27,15 @@ const useStyles = makeStyles(theme => ({
     },
   },
   element: {
-    width: 130,
-    height: 80,
+    width: '10vw',
+    height: 96,
     padding: 4,
     boxSizing: 'border-box',
     border: `0.5px solid ${grey[300]}`,
     borderStyle: 'none solid solid none',
     [theme.breakpoints.down('sm')]: {
       width: '13vw',
-      height: 64,
+      height: 80,
     },
   },
   out: { color: grey[500] },
@@ -53,14 +54,15 @@ const useStyles = makeStyles(theme => ({
 interface OwnProps {
   year: number;
   month: number;
+  events: Array<Event>;
 }
 
 type Props = OwnProps & CalenderBoardHandler;
 
 export const CalenderBoard: React.FC<Props> = props => {
   const classes = useStyles({} as StyledProps);
-  const { year, month, handleChangeMonth } = props;
-  const calender = Calender.getInstance(year, month);
+  const { year, month, events, handleChangeMonth } = props;
+  const calender = Calender.getInstance(year, month, events);
   const styleOfDaysOfWeek: (day: number) => string = day => {
     const baseStyle = classes.element + ' ' + classes.dayOfWeek;
     switch (day) {
