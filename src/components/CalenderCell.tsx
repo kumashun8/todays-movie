@@ -1,24 +1,26 @@
 import * as React from 'react';
+import { CalenderElement } from 'lib/calenderElement';
+import { Typography } from '@material-ui/core';
+import { Events } from './Events';
 
 type Props = {
-  index: number;
-  element: { date: number; isInCurrentMonth: boolean };
+  element: CalenderElement;
   classes: Record<string, string>;
 };
 
 export const CalenderCell: React.FC<Props> = props => {
-  const { index, element, classes } = props;
+  const { element, classes } = props;
 
   return (
     <div
-      key={index}
       className={
         element.isInCurrentMonth
           ? classes.element
           : classes.element + ' ' + classes.out
       }
     >
-      {element.date}
+      <Typography>{element.date}</Typography>
+      {element.events.length > 0 && <Events events={element.events} />}
     </div>
   );
 };

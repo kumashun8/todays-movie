@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { CalenderActions } from 'redux/actions';
 import { CalenderBoard } from 'components/CalenderBoard';
 import { Dispatch } from 'react';
+import { Event } from 'lib/event';
 
 interface StateAtProps {
   year: number;
   month: number;
+  events: Array<Event>;
 }
 
 export interface CalenderBoardHandler {
@@ -17,6 +19,7 @@ const mapStateToProps = (appState: Appstate): StateAtProps => {
   return {
     year: appState.state.year,
     month: appState.state.month,
+    events: appState.state.events,
   };
 };
 

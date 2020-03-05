@@ -29,7 +29,7 @@ export const CalenderHead: React.FC<Props> = props => {
 
   return (
     <Grid container justify="center" alignItems="center">
-      <Grid item alignItems="center">
+      <Grid item>
         <IconButton onClick={handleChangeToPrevMonth}>
           <ChevronLeft />
         </IconButton>
@@ -40,7 +40,7 @@ export const CalenderHead: React.FC<Props> = props => {
           <Typography variant="h1">{month}</Typography>
         </div>
       </Grid>
-      <Grid item alignItems="center">
+      <Grid item>
         <IconButton onClick={handleChangeToNextMonth}>
           <ChevronRight />
         </IconButton>
