@@ -24,6 +24,7 @@ theme.typography = {
   h1: {
     fontFamily: 'Audiowide',
     fontSize: 80,
+    marginTop: -12,
     whiteSpace: 'pre-line',
     color: palette.primary.main,
     [theme.breakpoints.down('xs')]: {
@@ -97,8 +98,6 @@ theme.typography = {
     fontFamily: 'Koruri, Arial',
     whiteSpace: 'pre-line',
     fontSize: 16,
-    marginBottom: 2,
-    color: '#030303',
     [theme.breakpoints.down('xs')]: {
       fontSize: 14,
       lineHeight: '28px',

@@ -20,6 +20,8 @@ export const initialState: State = {
   events: [
     { date: [2020, 3, 6], value: 'マッドマックス' },
     { date: [2020, 3, 6], value: '健康診断' },
+    { date: [2020, 3, 15], value: '兄の誕生日' },
+    { date: [2020, 3, 25], value: '学位授与の日' },
     { date: [2020, 4, 3], value: '入社式' },
   ],
 };

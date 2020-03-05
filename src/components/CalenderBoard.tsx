@@ -45,7 +45,16 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    color: theme.palette.primary.main,
     backgroundColor: grey[200],
+    '&:first-child': {
+      color: grey[200],
+      backgroundColor: theme.palette.primary.light,
+    },
+    '&:last-child': {
+      color: grey[200],
+      backgroundColor: theme.palette.primary.light,
+    },
   },
   sunDay: { backgroundColor: red[100] },
   saturDay: { backgroundColor: indigo[100] },
@@ -66,10 +75,10 @@ export const CalenderBoard: React.FC<Props> = props => {
   const styleOfDaysOfWeek: (day: number) => string = day => {
     const baseStyle = classes.element + ' ' + classes.dayOfWeek;
     switch (day) {
-      case 0:
-        return baseStyle + ' ' + classes.sunDay;
-      case 6:
-        return baseStyle + ' ' + classes.saturDay;
+      // case 0:
+      //   return baseStyle + ' ' + classes.sunDay;
+      // case 6:
+      //   return baseStyle + ' ' + classes.saturDay;
       default:
         return baseStyle;
     }

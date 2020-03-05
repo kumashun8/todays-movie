@@ -4,10 +4,11 @@ import { Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   event: {
-    marginBottom: 2,
+    marginTop: 2,
     padding: '0 2px',
     backgroundColor: theme.palette.secondary.light,
     '&:nth-child(2n)': {
+      color: '#fafafa',
       backgroundColor: theme.palette.primary.light,
     },
   },
