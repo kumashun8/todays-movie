@@ -73,17 +73,6 @@ export const CalenderBoard: React.FC<Props> = props => {
   const classes = useStyles({} as StyledProps);
   const { year, month, events, handleChangeMonth } = props;
   const calender = Calender.getInstance(year, month, events);
-  const styleOfDaysOfWeek: (day: number) => string = day => {
-    const baseStyle = classes.element + ' ' + classes.dayOfWeek;
-    switch (day) {
-      // case 0:
-      //   return baseStyle + ' ' + classes.sunDay;
-      // case 6:
-      //   return baseStyle + ' ' + classes.saturDay;
-      default:
-        return baseStyle;
-    }
-  };
   const handleChangeToPrevMonth: () => void = () => {
     handleChangeMonth(calender.prevMonth());
   };
@@ -98,7 +87,7 @@ export const CalenderBoard: React.FC<Props> = props => {
       />
       <div className={classes.elements + ' ' + classes.dayOfWeek}>
         {DAYS_OF_WEEK.map((d, i) => (
-          <div key={i} className={styleOfDaysOfWeek(i)}>
+          <div key={i} className={classes.element + ' ' + classes.dayOfWeek}>
             <Typography>{d}</Typography>
           </div>
         ))}
