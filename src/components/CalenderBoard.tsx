@@ -96,7 +96,7 @@ export const CalenderBoard: React.FC<Props> = props => {
       <div className={classes.elements}>
         {calender.calenderElements.map((c, i) => (
           <div key={i}>
-            <CalenderCell index={i} element={c} classes={classes} />
+            <CalenderCell element={c} classes={classes} />
           </div>
         ))}
       </div>
