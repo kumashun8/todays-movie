@@ -10,4 +10,5 @@ export const CalenderActions = {
 };
 export const EventActions = {
   addEvent: actionCreater<Event>('ADD_EVENT'),
+  toggleDialog: actionCreater('TOGGLE_DIALOG'),
 };

@@ -6,6 +6,7 @@ export interface State {
   year: number;
   month: number;
   events: Array<Event>;
+  dialogIsOpen: boolean;
 }
 
 export const initialState: State = {
@@ -18,6 +19,7 @@ export const initialState: State = {
     { date: [2020, 3, 25], value: '学位授与の日だったけどなくなった' },
     { date: [2020, 4, 3], value: '入社式' },
   ],
+  dialogIsOpen: false,
 };
 
 export const Reducer = reducerWithInitialState(initialState)
@@ -26,4 +28,7 @@ export const Reducer = reducerWithInitialState(initialState)
   })
   .case(EventActions.addEvent, (state, newEvent) => {
     return { ...state, events: [...state.events, newEvent] };
+  })
+  .case(EventActions.toggleDialog, state => {
+    return { ...state, dialogIsOpen: !state.dialogIsOpen };
   });
