@@ -4,6 +4,7 @@ import { EventActions, CalenderActions } from 'redux/actions';
 import { Dispatch } from 'react';
 import { EventDialog } from 'components/EventDialog';
 import { CalenderElement } from 'lib/calenderElement';
+import { Event } from 'lib/event';
 
 interface StateAtProps {
   year: number;
@@ -17,6 +18,7 @@ export interface EventDialogHandler {
   handleClearCurrentElement(): void;
   handleToggleDialog(): void;
   handleUpdateInputEventValue(inputEventValue: string): void;
+  handleAddEvent(newEvent: Event): void;
 }
 
 const mapStateToProps = (appState: Appstate): StateAtProps => {
@@ -39,6 +41,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>): EventDialogHandler => {
     },
     handleUpdateInputEventValue: inputEventValue => {
       dispatch(EventActions.updateInputEventValue(inputEventValue));
+    },
+    handleAddEvent: newEvent => {
+      dispatch(EventActions.addEvent(newEvent));
     },
   };
 };

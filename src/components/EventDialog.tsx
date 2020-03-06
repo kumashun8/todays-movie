@@ -12,6 +12,7 @@ import { EventDialogHandler } from 'containers/EventDialogContainer';
 import { CalenderElement } from 'lib/calenderElement';
 import { Events } from './Events';
 import { DAYS_OF_WEEK } from 'lib/common';
+import { Event } from 'lib/event';
 
 const useStyles = makeStyles(() => ({
   dayOfWeek: {
@@ -41,6 +42,7 @@ export const EventDialog: React.FC<Props> = props => {
     handleToggleDialog,
     handleClearCurrentElement,
     handleUpdateInputEventValue,
+    handleAddEvent,
   } = props;
   const dayOfWeek =
     DAYS_OF_WEEK[
@@ -48,7 +50,16 @@ export const EventDialog: React.FC<Props> = props => {
     ];
   const handleCloseThis: () => void = () => {
     handleClearCurrentElement();
+    handleUpdateInputEventValue('');
     handleToggleDialog();
+  };
+  const handleCreateAndAddEvent: () => void = () => {
+    if (currentElement) {
+      handleAddEvent(
+        new Event([year, month, currentElement.date], inputEventValue)
+      );
+      handleCloseThis();
+    }
   };
 
   if (!currentElement) {
@@ -78,7 +89,7 @@ export const EventDialog: React.FC<Props> = props => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleCloseThis}>閉じる</Button>
-        <Button>追加</Button>
+        <Button onClick={handleCreateAndAddEvent}>追加</Button>
       </DialogActions>
     </Dialog>
   );
