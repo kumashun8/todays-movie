@@ -10,6 +10,11 @@ type Props = {
 
 export const CalenderCell: React.FC<Props> = props => {
   const { element, classes } = props;
+  const handleOpenDialog: () => void = () => {
+    if (element.isInCurrentMonth) {
+      console.log('hi');
+    }
+  };
 
   return (
     <div
@@ -18,6 +23,7 @@ export const CalenderCell: React.FC<Props> = props => {
           ? classes.element
           : classes.element + ' ' + classes.out
       }
+      onClick={handleOpenDialog}
     >
       <Typography>{element.date}</Typography>
       {element.events.length > 0 && <Events events={element.events} />}
