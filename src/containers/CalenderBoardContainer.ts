@@ -4,6 +4,7 @@ import { CalenderActions, EventActions } from 'redux/actions';
 import { CalenderBoard } from 'components/CalenderBoard';
 import { Dispatch } from 'react';
 import { Event } from 'lib/event';
+import { CalenderElement } from 'lib/calenderElement';
 
 interface StateAtProps {
   year: number;
@@ -14,7 +15,7 @@ interface StateAtProps {
 
 export interface CalenderBoardHandler {
   handleChangeMonth(value: { year: number; month: number }): void;
-  handleSelectEvents(currentEvents: string[]): void;
+  handleSelectElement(currentElement: CalenderElement): void;
   handleToggleDialog(): void;
 }
 
@@ -32,8 +33,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>): CalenderBoardHandler => {
     handleChangeMonth: ({ year, month }) => {
       dispatch(CalenderActions.updateCurrentMonth({ year, month }));
     },
-    handleSelectEvents: currentEvents => {
-      dispatch(CalenderActions.updateCurrentEvents(currentEvents));
+    handleSelectElement: currentEvents => {
+      dispatch(CalenderActions.updateCurrentElement(currentEvents));
     },
     handleToggleDialog: () => {
       dispatch(EventActions.toggleDialog());

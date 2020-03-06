@@ -1,13 +1,15 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { CalenderActions, EventActions } from 'redux/actions';
 import { Event } from 'lib/event';
+import { CalenderElement } from 'lib/calenderElement';
 
 export interface State {
   year: number;
   month: number;
   events: Array<Event>;
   dialogIsOpen: boolean;
-  currentEvents: string[];
+  currentElement?: CalenderElement;
+  currentDay?: number;
 }
 
 export const initialState: State = {
@@ -21,18 +23,17 @@ export const initialState: State = {
     { date: [2020, 4, 3], value: '入社式' },
   ],
   dialogIsOpen: false,
-  currentEvents: [],
 };
 
 export const Reducer = reducerWithInitialState(initialState)
   .case(CalenderActions.updateCurrentMonth, (state, { year, month }) => {
     return { ...state, year, month };
   })
-  .case(CalenderActions.updateCurrentEvents, (state, currentEvents) => {
-    return { ...state, currentEvents };
+  .case(CalenderActions.updateCurrentElement, (state, currentElement) => {
+    return { ...state, currentElement };
   })
-  .case(CalenderActions.clearCurrentEvents, state => {
-    return { ...state, currentEvents: [] };
+  .case(CalenderActions.clearCurrentElement, state => {
+    return { ...state, currentEvents: null };
   })
   .case(EventActions.addEvent, (state, newEvent) => {
     return { ...state, events: [...state.events, newEvent] };

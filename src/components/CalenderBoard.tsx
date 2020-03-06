@@ -78,7 +78,7 @@ export const CalenderBoard: React.FC<Props> = props => {
     month,
     events,
     handleChangeMonth,
-    handleSelectEvents,
+    handleSelectElement,
     handleToggleDialog,
   } = props;
   const calender = Calender.getInstance(year, month, events);
@@ -90,7 +90,7 @@ export const CalenderBoard: React.FC<Props> = props => {
   };
   const handleOpenDialog: (element: CalenderElement) => void = element => {
     if (element.isInCurrentMonth) {
-      handleSelectEvents(element.events);
+      handleSelectElement(element);
       handleToggleDialog();
     }
   };

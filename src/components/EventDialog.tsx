@@ -23,9 +23,9 @@ type Props = OwnProps & EventDialogHandler;
 
 export const EventDialog: React.FC<Props> = props => {
   const classes = useStyles();
-  const { dialogIsOpen, handleToggleDialog, handleClearCurrentEvents } = props;
+  const { dialogIsOpen, handleToggleDialog, handleClearCurrentElement } = props;
   const handleCloseThis: () => void = () => {
-    handleClearCurrentEvents();
+    handleClearCurrentElement();
     handleToggleDialog();
   };
 

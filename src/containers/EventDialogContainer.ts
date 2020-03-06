@@ -9,7 +9,7 @@ interface StateAtProps {
 }
 
 export interface EventDialogHandler {
-  handleClearCurrentEvents(): void;
+  handleClearCurrentElement(): void;
   handleToggleDialog(): void;
 }
 
@@ -21,8 +21,8 @@ const mapStateToProps = (appState: Appstate): StateAtProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch<any>): EventDialogHandler => {
   return {
-    handleClearCurrentEvents: () => {
-      dispatch(CalenderActions.clearCurrentEvents());
+    handleClearCurrentElement: () => {
+      dispatch(CalenderActions.clearCurrentElement());
     },
     handleToggleDialog: () => {
       dispatch(EventActions.toggleDialog());
