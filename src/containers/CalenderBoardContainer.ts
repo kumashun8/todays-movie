@@ -14,6 +14,7 @@ interface StateAtProps {
 
 export interface CalenderBoardHandler {
   handleChangeMonth(value: { year: number; month: number }): void;
+  handleSelectEvents(currentEvents: string[]): void;
   handleToggleDialog(): void;
 }
 
@@ -30,6 +31,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>): CalenderBoardHandler => {
   return {
     handleChangeMonth: ({ year, month }) => {
       dispatch(CalenderActions.updateCurrentMonth({ year, month }));
+    },
+    handleSelectEvents: currentEvents => {
+      dispatch(CalenderActions.updateCurrentEvents(currentEvents));
     },
     handleToggleDialog: () => {
       dispatch(EventActions.toggleDialog());

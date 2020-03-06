@@ -6,16 +6,11 @@ import { Events } from './Events';
 type Props = {
   element: CalenderElement;
   classes: Record<string, string>;
-  handleToggleDialog(): void;
+  handleOpenDialog(element: CalenderElement): void;
 };
 
 export const CalenderCell: React.FC<Props> = props => {
-  const { element, classes, handleToggleDialog } = props;
-  const handleOpenDialog: () => void = () => {
-    if (element.isInCurrentMonth) {
-      handleToggleDialog();
-    }
-  };
+  const { element, classes, handleOpenDialog } = props;
 
   return (
     <div
@@ -24,7 +19,7 @@ export const CalenderCell: React.FC<Props> = props => {
           ? classes.element
           : classes.element + ' ' + classes.out
       }
-      onClick={handleOpenDialog}
+      onClick={() => handleOpenDialog(element)}
     >
       <Typography>{element.date}</Typography>
       {element.events.length > 0 && <Events events={element.events} />}

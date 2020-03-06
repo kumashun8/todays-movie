@@ -7,6 +7,7 @@ import { CalenderHead } from './CalenderHead';
 import { CalenderBoardHandler } from 'containers/CalenderBoardContainer';
 import { Event } from 'lib/event';
 import { DAYS_OF_WEEK } from 'lib/common';
+import { CalenderElement } from 'lib/calenderElement';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -72,13 +73,26 @@ type Props = OwnProps & CalenderBoardHandler;
 
 export const CalenderBoard: React.FC<Props> = props => {
   const classes = useStyles({} as StyledProps);
-  const { year, month, events, handleChangeMonth, handleToggleDialog } = props;
+  const {
+    year,
+    month,
+    events,
+    handleChangeMonth,
+    handleSelectEvents,
+    handleToggleDialog,
+  } = props;
   const calender = Calender.getInstance(year, month, events);
   const handleChangeToPrevMonth: () => void = () => {
     handleChangeMonth(calender.prevMonth());
   };
   const handleChangeToNextMonth: () => void = () => {
     handleChangeMonth(calender.nextMonth());
+  };
+  const handleOpenDialog: (element: CalenderElement) => void = element => {
+    if (element.isInCurrentMonth) {
+      handleSelectEvents(element.events);
+      handleToggleDialog();
+    }
   };
 
   return (
@@ -96,7 +110,7 @@ export const CalenderBoard: React.FC<Props> = props => {
       <div className={classes.elements}>
         {calender.calenderElements.map((element, i) => (
           <div key={i}>
-            <CalenderCell {...{ element, classes, handleToggleDialog }} />
+            <CalenderCell {...{ element, classes, handleOpenDialog }} />
           </div>
         ))}
       </div>
