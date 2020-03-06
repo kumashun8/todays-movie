@@ -1,5 +1,5 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { InputActions, CalenderActions } from 'redux/actions';
+import { InputActions, CalenderActions, EventActions } from 'redux/actions';
 import { Event } from 'lib/event';
 
 export interface State {
@@ -38,4 +38,7 @@ export const Reducer = reducerWithInitialState(initialState)
   })
   .case(CalenderActions.updateCurrentMonth, (state, { year, month }) => {
     return { ...state, year, month };
+  })
+  .case(EventActions.addEvent, (state, newEvent) => {
+    return { ...state, events: [...state.events, newEvent] };
   });
