@@ -9,28 +9,35 @@ import {
   DialogActions,
   Button,
 } from '@material-ui/core';
+import { EventDialogHandler } from 'containers/EventDialogContainer';
 
 const useStyles = makeStyles(() => ({
   root: { padding: 24 },
 }));
 
-type Props = {
-  isOpen: boolean;
-};
+interface OwnProps {
+  dialogIsOpen: boolean;
+}
+
+type Props = OwnProps & EventDialogHandler;
 
 export const EventDialog: React.FC<Props> = props => {
   const classes = useStyles();
-  const { isOpen } = props;
+  const { dialogIsOpen, handleToggleDialog } = props;
 
   return (
-    <Dialog open={isOpen} aria-labelledby="event-dialog">
+    <Dialog
+      open={dialogIsOpen}
+      onClose={handleToggleDialog}
+      aria-labelledby="event-dialog"
+    >
       <DialogTitle>予定</DialogTitle>
       <DialogContent style={{ width: 400 }}>
         <DialogContentText>サンプルです。</DialogContentText>
         <TextField autoFocus id="new-event" label="予定を追加" fullWidth />
       </DialogContent>
       <DialogActions>
-        <Button>閉じる</Button>
+        <Button onClick={handleToggleDialog}>閉じる</Button>
         <Button>追加</Button>
       </DialogActions>
     </Dialog>

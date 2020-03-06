@@ -33,6 +33,7 @@ const useStyles = makeStyles(theme => ({
     padding: 2,
     boxSizing: 'border-box',
     border: `0.5px solid ${grey[300]}`,
+    cursor: 'pointer',
     borderStyle: 'none solid solid none',
     [theme.breakpoints.down('sm')]: {
       width: '13vw',
@@ -71,7 +72,7 @@ type Props = OwnProps & CalenderBoardHandler;
 
 export const CalenderBoard: React.FC<Props> = props => {
   const classes = useStyles({} as StyledProps);
-  const { year, month, events, handleChangeMonth } = props;
+  const { year, month, events, handleChangeMonth, handleToggleDialog } = props;
   const calender = Calender.getInstance(year, month, events);
   const handleChangeToPrevMonth: () => void = () => {
     handleChangeMonth(calender.prevMonth());
@@ -93,9 +94,9 @@ export const CalenderBoard: React.FC<Props> = props => {
         ))}
       </div>
       <div className={classes.elements}>
-        {calender.calenderElements.map((c, i) => (
+        {calender.calenderElements.map((element, i) => (
           <div key={i}>
-            <CalenderCell element={c} classes={classes} />
+            <CalenderCell {...{ element, classes, handleToggleDialog }} />
           </div>
         ))}
       </div>

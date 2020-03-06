@@ -6,13 +6,14 @@ import { Events } from './Events';
 type Props = {
   element: CalenderElement;
   classes: Record<string, string>;
+  handleToggleDialog(): void;
 };
 
 export const CalenderCell: React.FC<Props> = props => {
-  const { element, classes } = props;
+  const { element, classes, handleToggleDialog } = props;
   const handleOpenDialog: () => void = () => {
     if (element.isInCurrentMonth) {
-      console.log('hi');
+      handleToggleDialog();
     }
   };
 
