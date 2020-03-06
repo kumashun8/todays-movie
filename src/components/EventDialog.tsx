@@ -10,12 +10,21 @@ import {
   Button,
 } from '@material-ui/core';
 import { EventDialogHandler } from 'containers/EventDialogContainer';
+import { CalenderElement } from 'lib/calenderElement';
+import { Events } from './Events';
+import { DAYS_OF_WEEK } from 'lib/common';
 
 const useStyles = makeStyles(() => ({
-  root: { padding: 24 },
+  dayOfWeek: {
+    fontSize: 24,
+    marginLeft: 16,
+  },
 }));
 
 interface OwnProps {
+  year: number;
+  month: number;
+  currentElement?: CalenderElement;
   dialogIsOpen: boolean;
 }
 
@@ -23,11 +32,26 @@ type Props = OwnProps & EventDialogHandler;
 
 export const EventDialog: React.FC<Props> = props => {
   const classes = useStyles();
-  const { dialogIsOpen, handleToggleDialog, handleClearCurrentElement } = props;
+  const {
+    year,
+    month,
+    currentElement,
+    dialogIsOpen,
+    handleToggleDialog,
+    handleClearCurrentElement,
+  } = props;
+  const dayOfWeek =
+    DAYS_OF_WEEK[
+      new Date(month + ' ' + currentElement?.date + ' ' + year).getDay()
+    ];
   const handleCloseThis: () => void = () => {
     handleClearCurrentElement();
     handleToggleDialog();
   };
+
+  if (!currentElement) {
+    return <div />;
+  }
 
   return (
     <Dialog
@@ -35,9 +59,14 @@ export const EventDialog: React.FC<Props> = props => {
       onClose={handleCloseThis}
       aria-labelledby="event-dialog"
     >
-      <DialogTitle>予定</DialogTitle>
+      <DialogTitle>
+        {month + '/' + currentElement.date}
+        <span className={classes.dayOfWeek}>{dayOfWeek}</span>
+      </DialogTitle>
       <DialogContent style={{ width: 400 }}>
-        <DialogContentText>サンプルです。</DialogContentText>
+        <DialogContentText>
+          <Events events={currentElement.events} />
+        </DialogContentText>
         <TextField autoFocus id="new-event" label="予定を追加" fullWidth />
       </DialogContent>
       <DialogActions>

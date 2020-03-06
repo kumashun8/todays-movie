@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import { EventActions, CalenderActions } from 'redux/actions';
 import { Dispatch } from 'react';
 import { EventDialog } from 'components/EventDialog';
+import { CalenderElement } from 'lib/calenderElement';
 
 interface StateAtProps {
+  year: number;
+  month: number;
+  currentElement?: CalenderElement;
   dialogIsOpen: boolean;
 }
 
@@ -15,6 +19,9 @@ export interface EventDialogHandler {
 
 const mapStateToProps = (appState: Appstate): StateAtProps => {
   return {
+    year: appState.state.year,
+    month: appState.state.month,
+    currentElement: appState.state.currentElement,
     dialogIsOpen: appState.state.dialogIsOpen,
   };
 };
