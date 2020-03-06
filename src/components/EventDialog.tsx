@@ -65,7 +65,7 @@ export const EventDialog: React.FC<Props> = props => {
       </DialogTitle>
       <DialogContent style={{ width: 400 }}>
         <DialogContentText>
-          <Events events={currentElement.events} />
+          <Events events={currentElement.events} large />
         </DialogContentText>
         <TextField autoFocus id="new-event" label="予定を追加" fullWidth />
       </DialogContent>
