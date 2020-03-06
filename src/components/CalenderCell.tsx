@@ -22,7 +22,9 @@ export const CalenderCell: React.FC<Props> = props => {
       onClick={() => handleOpenDialog(element)}
     >
       <Typography>{element.date}</Typography>
-      {element.events.length > 0 && <Events events={element.events} />}
+      <div>
+        {element.events.length > 0 && <Events events={element.omittedEvents} />}
+      </div>
     </div>
   );
 };

@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   TextField,
   DialogActions,
   Button,
@@ -64,9 +63,7 @@ export const EventDialog: React.FC<Props> = props => {
         <span className={classes.dayOfWeek}>{dayOfWeek}</span>
       </DialogTitle>
       <DialogContent style={{ width: 400 }}>
-        <DialogContentText>
-          <Events events={currentElement.events} large />
-        </DialogContentText>
+        <Events events={currentElement.events} large />
         <TextField autoFocus id="new-event" label="予定を追加" fullWidth />
       </DialogContent>
       <DialogActions>

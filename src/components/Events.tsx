@@ -31,23 +31,21 @@ export const Events: React.FC<Props> = props => {
   const isDesktop = useMediaQuery('(min-width:960px)');
   const { events, large = false } = props;
 
-  return (
+  return isDesktop ? (
     <div>
-      {isDesktop ? (
-        events.map((event, i) => (
-          <Typography
-            key={i}
-            variant={large ? 'body1' : 'body2'}
-            className={classes.event}
-          >
-            {event}
-          </Typography>
-        ))
-      ) : (
-        <div className={classes.counterWrapper}>
-          <EventCounter count={events.length} />
-        </div>
-      )}
+      {events.map((event, i) => (
+        <Typography
+          key={i}
+          variant={large ? 'body1' : 'body2'}
+          className={classes.event}
+        >
+          {event}
+        </Typography>
+      ))}
+    </div>
+  ) : (
+    <div className={classes.counterWrapper}>
+      <EventCounter count={events.length} />
     </div>
   );
 };
