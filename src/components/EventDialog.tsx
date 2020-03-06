@@ -14,11 +14,22 @@ import { Events } from './Events';
 import { DAYS_OF_WEEK } from 'lib/common';
 import { Event } from 'lib/event';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   dayOfWeek: {
     fontSize: 24,
     marginLeft: 16,
+    [theme.breakpoints.down('xs')]: {
+      fontSize: 16,
+    },
   },
+  content: {
+    width: 400,
+    [theme.breakpoints.down('xs')]: {
+      width: 200,
+    },
+  },
+  input: { marginTop: 24 },
+  actions: { padding: '8px 24px 16px' },
 }));
 
 interface OwnProps {
@@ -76,20 +87,30 @@ export const EventDialog: React.FC<Props> = props => {
         {month + '/' + currentElement.date}
         <span className={classes.dayOfWeek}>{dayOfWeek}</span>
       </DialogTitle>
-      <DialogContent style={{ width: 400 }}>
+      <DialogContent className={classes.content}>
         <Events events={currentElement.events} large />
         <TextField
           autoFocus
           id="new-event"
           label="予定を追加"
           fullWidth
+          className={classes.input}
           value={inputEventValue}
           onChange={e => handleUpdateInputEventValue(e.target.value)}
         />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleCloseThis}>閉じる</Button>
-        <Button onClick={handleCreateAndAddEvent}>追加</Button>
+      <DialogActions className={classes.actions}>
+        <Button variant="outlined" color="default" onClick={handleCloseThis}>
+          閉じる
+        </Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          disabled={!inputEventValue}
+          onClick={handleCreateAndAddEvent}
+        >
+          追加
+        </Button>
       </DialogActions>
     </Dialog>
   );

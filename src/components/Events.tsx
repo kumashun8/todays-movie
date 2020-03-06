@@ -9,9 +9,6 @@ const useStyles = makeStyles(theme => ({
     padding: '0 2px',
     color: '#030303',
     backgroundColor: theme.palette.secondary.light,
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
   },
   counterWrapper: {
     display: 'flex',
@@ -31,7 +28,7 @@ export const Events: React.FC<Props> = props => {
   const isDesktop = useMediaQuery('(min-width:960px)');
   const { events, large = false } = props;
 
-  return isDesktop ? (
+  return isDesktop || large ? (
     <div>
       {events.map((event, i) => (
         <Typography
