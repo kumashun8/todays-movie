@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core';
-import { Typography, useMediaQuery } from '@material-ui/core';
-import { EventCounter } from './EventCounter';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   event: {
@@ -25,10 +24,9 @@ type Props = {
 
 export const Events: React.FC<Props> = props => {
   const classes = useStyles();
-  const isDesktop = useMediaQuery('(min-width:960px)');
   const { events, large = false } = props;
 
-  return isDesktop || large ? (
+  return (
     <div>
       {events.map((event, i) => (
         <Typography
@@ -39,10 +37,6 @@ export const Events: React.FC<Props> = props => {
           {event}
         </Typography>
       ))}
-    </div>
-  ) : (
-    <div className={classes.counterWrapper}>
-      <EventCounter count={events.length} />
     </div>
   );
 };
