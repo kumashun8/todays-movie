@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core';
-import { Typography, useMediaQuery } from '@material-ui/core';
-import { EventCounter } from './EventCounter';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   event: {
     marginTop: 2,
     padding: '0 2px',
+    color: '#030303',
     backgroundColor: theme.palette.secondary.light,
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
   },
   counterWrapper: {
     display: 'flex',
@@ -22,26 +19,24 @@ const useStyles = makeStyles(theme => ({
 
 type Props = {
   events: string[];
+  large?: boolean;
 };
 
 export const Events: React.FC<Props> = props => {
   const classes = useStyles();
-  const isDesktop = useMediaQuery('(min-width:960px)');
-  const { events } = props;
+  const { events, large = false } = props;
 
   return (
     <div>
-      {isDesktop ? (
-        events.map((event, i) => (
-          <Typography key={i} variant="body2" className={classes.event}>
-            {event}
-          </Typography>
-        ))
-      ) : (
-        <div className={classes.counterWrapper}>
-          <EventCounter count={events.length} />
-        </div>
-      )}
+      {events.map((event, i) => (
+        <Typography
+          key={i}
+          variant={large ? 'body1' : 'body2'}
+          className={classes.event}
+        >
+          {event}
+        </Typography>
+      ))}
     </div>
   );
 };

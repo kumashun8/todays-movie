@@ -1,6 +1,7 @@
 import * as React from 'react';
 import CalenderBoardContainer from 'containers/CalenderBoardContainer';
 import { makeStyles } from '@material-ui/core';
+import EventDialogContainer from 'containers/EventDialogContainer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,6 +21,7 @@ const App: React.FC = () => {
     <React.Fragment>
       <div className={classes.root}>
         <CalenderBoardContainer />
+        <EventDialogContainer />
       </div>
     </React.Fragment>
   );

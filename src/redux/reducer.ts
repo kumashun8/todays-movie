@@ -1,20 +1,19 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { InputActions, CalenderActions } from 'redux/actions';
+import { CalenderActions, EventActions } from 'redux/actions';
 import { Event } from 'lib/event';
+import { CalenderElement } from 'lib/calenderElement';
 
 export interface State {
-  inputValue: string;
-  selectedValue: string;
-  clickCount: number;
   year: number;
   month: number;
   events: Array<Event>;
+  dialogIsOpen: boolean;
+  currentElement?: CalenderElement;
+  currentDay?: number;
+  inputEventValue: string;
 }
 
 export const initialState: State = {
-  inputValue: '',
-  selectedValue: '',
-  clickCount: 0,
   year: 2020,
   month: 3,
   events: [
@@ -24,18 +23,26 @@ export const initialState: State = {
     { date: [2020, 3, 25], value: '学位授与の日だったけどなくなった' },
     { date: [2020, 4, 3], value: '入社式' },
   ],
+  dialogIsOpen: false,
+  inputEventValue: '',
 };
 
 export const Reducer = reducerWithInitialState(initialState)
-  .case(InputActions.updateTextInputValue, (state, inputValue) => {
-    return { ...state, inputValue };
-  })
-  .case(InputActions.updateSelectedValue, (state, selectedValue) => {
-    return { ...state, selectedValue };
-  })
-  .case(InputActions.updateCount, state => {
-    return { ...state, clickCount: state.clickCount + 1 };
-  })
   .case(CalenderActions.updateCurrentMonth, (state, { year, month }) => {
     return { ...state, year, month };
+  })
+  .case(CalenderActions.updateCurrentElement, (state, currentElement) => {
+    return { ...state, currentElement };
+  })
+  .case(CalenderActions.clearCurrentElement, state => {
+    return { ...state, currentEvents: null };
+  })
+  .case(EventActions.addEvent, (state, newEvent) => {
+    return { ...state, events: [...state.events, newEvent] };
+  })
+  .case(EventActions.toggleDialog, state => {
+    return { ...state, dialogIsOpen: !state.dialogIsOpen };
+  })
+  .case(EventActions.updateInputEventValue, (state, inputEventValue) => {
+    return { ...state, inputEventValue };
   });
