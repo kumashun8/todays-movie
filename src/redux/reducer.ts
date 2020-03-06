@@ -10,6 +10,7 @@ export interface State {
   dialogIsOpen: boolean;
   currentElement?: CalenderElement;
   currentDay?: number;
+  inputEventValue: string;
 }
 
 export const initialState: State = {
@@ -23,6 +24,7 @@ export const initialState: State = {
     { date: [2020, 4, 3], value: '入社式' },
   ],
   dialogIsOpen: false,
+  inputEventValue: '',
 };
 
 export const Reducer = reducerWithInitialState(initialState)
@@ -40,4 +42,7 @@ export const Reducer = reducerWithInitialState(initialState)
   })
   .case(EventActions.toggleDialog, state => {
     return { ...state, dialogIsOpen: !state.dialogIsOpen };
+  })
+  .case(EventActions.updateInputEventValue, (state, inputEventValue) => {
+    return { ...state, inputEventValue };
   });

@@ -4,7 +4,7 @@ import { jaJP } from '@material-ui/core/locale';
 const palette = {
   primary: { main: '#00796B' },
   secondary: { main: '#fbc02d' },
-  error: { main: '#ef5350' },
+  error: { main: '#e64a19' },
   warning: { main: '#cddc39' },
   info: { main: '#004d40' },
   success: { main: '#26c6da' },

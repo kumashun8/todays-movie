@@ -16,4 +16,5 @@ export const CalenderActions = {
 export const EventActions = {
   addEvent: actionCreater<Event>('ADD_EVENT'),
   toggleDialog: actionCreater('TOGGLE_DIALOG'),
+  updateInputEventValue: actionCreater<string>('UPDATE_INPUT_EVENT_VALUE'),
 };
