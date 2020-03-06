@@ -1,6 +1,6 @@
 import { Appstate } from 'redux/store';
 import { connect } from 'react-redux';
-import { EventActions } from 'redux/actions';
+import { EventActions, CalenderActions } from 'redux/actions';
 import { Dispatch } from 'react';
 import { EventDialog } from 'components/EventDialog';
 
@@ -9,6 +9,7 @@ interface StateAtProps {
 }
 
 export interface EventDialogHandler {
+  handleClearCurrentEvents(): void;
   handleToggleDialog(): void;
 }
 
@@ -20,6 +21,9 @@ const mapStateToProps = (appState: Appstate): StateAtProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch<any>): EventDialogHandler => {
   return {
+    handleClearCurrentEvents: () => {
+      dispatch(CalenderActions.clearCurrentEvents());
+    },
     handleToggleDialog: () => {
       dispatch(EventActions.toggleDialog());
     },

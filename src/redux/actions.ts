@@ -8,6 +8,7 @@ export const CalenderActions = {
     'UPDATE_CURRENT_MONTH'
   ),
   updateCurrentEvents: actionCreater<string[]>('UPDATE_CURRENT_EVENTS'),
+  clearCurrentEvents: actionCreater('CLEAR_CURRENT_EVENTS'),
 };
 export const EventActions = {
   addEvent: actionCreater<Event>('ADD_EVENT'),

@@ -23,12 +23,16 @@ type Props = OwnProps & EventDialogHandler;
 
 export const EventDialog: React.FC<Props> = props => {
   const classes = useStyles();
-  const { dialogIsOpen, handleToggleDialog } = props;
+  const { dialogIsOpen, handleToggleDialog, handleClearCurrentEvents } = props;
+  const handleCloseThis: () => void = () => {
+    handleClearCurrentEvents();
+    handleToggleDialog();
+  };
 
   return (
     <Dialog
       open={dialogIsOpen}
-      onClose={handleToggleDialog}
+      onClose={handleCloseThis}
       aria-labelledby="event-dialog"
     >
       <DialogTitle>予定</DialogTitle>
@@ -37,7 +41,7 @@ export const EventDialog: React.FC<Props> = props => {
         <TextField autoFocus id="new-event" label="予定を追加" fullWidth />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleToggleDialog}>閉じる</Button>
+        <Button onClick={handleCloseThis}>閉じる</Button>
         <Button>追加</Button>
       </DialogActions>
     </Dialog>

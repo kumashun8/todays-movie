@@ -31,6 +31,9 @@ export const Reducer = reducerWithInitialState(initialState)
   .case(CalenderActions.updateCurrentEvents, (state, currentEvents) => {
     return { ...state, currentEvents };
   })
+  .case(CalenderActions.clearCurrentEvents, state => {
+    return { ...state, currentEvents: [] };
+  })
   .case(EventActions.addEvent, (state, newEvent) => {
     return { ...state, events: [...state.events, newEvent] };
   })
