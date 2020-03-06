@@ -7,6 +7,7 @@ export interface State {
   month: number;
   events: Array<Event>;
   dialogIsOpen: boolean;
+  currentEvents: string[];
 }
 
 export const initialState: State = {
@@ -20,11 +21,15 @@ export const initialState: State = {
     { date: [2020, 4, 3], value: '入社式' },
   ],
   dialogIsOpen: false,
+  currentEvents: [],
 };
 
 export const Reducer = reducerWithInitialState(initialState)
   .case(CalenderActions.updateCurrentMonth, (state, { year, month }) => {
     return { ...state, year, month };
+  })
+  .case(CalenderActions.updateCurrentEvents, (state, currentEvents) => {
+    return { ...state, currentEvents };
   })
   .case(EventActions.addEvent, (state, newEvent) => {
     return { ...state, events: [...state.events, newEvent] };
