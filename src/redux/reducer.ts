@@ -1,20 +1,14 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { InputActions, CalenderActions, EventActions } from 'redux/actions';
+import { CalenderActions, EventActions } from 'redux/actions';
 import { Event } from 'lib/event';
 
 export interface State {
-  inputValue: string;
-  selectedValue: string;
-  clickCount: number;
   year: number;
   month: number;
   events: Array<Event>;
 }
 
 export const initialState: State = {
-  inputValue: '',
-  selectedValue: '',
-  clickCount: 0,
   year: 2020,
   month: 3,
   events: [
@@ -27,15 +21,6 @@ export const initialState: State = {
 };
 
 export const Reducer = reducerWithInitialState(initialState)
-  .case(InputActions.updateTextInputValue, (state, inputValue) => {
-    return { ...state, inputValue };
-  })
-  .case(InputActions.updateSelectedValue, (state, selectedValue) => {
-    return { ...state, selectedValue };
-  })
-  .case(InputActions.updateCount, state => {
-    return { ...state, clickCount: state.clickCount + 1 };
-  })
   .case(CalenderActions.updateCurrentMonth, (state, { year, month }) => {
     return { ...state, year, month };
   })
