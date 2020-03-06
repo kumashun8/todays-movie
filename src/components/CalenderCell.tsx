@@ -10,6 +10,12 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'flex-end',
     marginRight: 4,
   },
+  counterWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 8,
+  },
 }));
 
 type Props = {
@@ -44,9 +50,11 @@ export const CalenderCell: React.FC<Props> = props => {
           )}
         </div>
       ) : (
-        <div className={classes.counterWrapper}>
-          <EventCounter count={length} />
-        </div>
+        length > 0 && (
+          <div className={classes2.counterWrapper}>
+            <EventCounter count={length} />
+          </div>
+        )
       )}
     </div>
   );
