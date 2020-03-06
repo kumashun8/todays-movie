@@ -10,11 +10,13 @@ interface StateAtProps {
   month: number;
   currentElement?: CalenderElement;
   dialogIsOpen: boolean;
+  inputEventValue: string;
 }
 
 export interface EventDialogHandler {
   handleClearCurrentElement(): void;
   handleToggleDialog(): void;
+  handleUpdateInputEventValue(inputEventValue: string): void;
 }
 
 const mapStateToProps = (appState: Appstate): StateAtProps => {
@@ -23,6 +25,7 @@ const mapStateToProps = (appState: Appstate): StateAtProps => {
     month: appState.state.month,
     currentElement: appState.state.currentElement,
     dialogIsOpen: appState.state.dialogIsOpen,
+    inputEventValue: appState.state.inputEventValue,
   };
 };
 
@@ -33,6 +36,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>): EventDialogHandler => {
     },
     handleToggleDialog: () => {
       dispatch(EventActions.toggleDialog());
+    },
+    handleUpdateInputEventValue: inputEventValue => {
+      dispatch(EventActions.updateInputEventValue(inputEventValue));
     },
   };
 };

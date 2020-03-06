@@ -25,6 +25,7 @@ interface OwnProps {
   month: number;
   currentElement?: CalenderElement;
   dialogIsOpen: boolean;
+  inputEventValue: string;
 }
 
 type Props = OwnProps & EventDialogHandler;
@@ -36,8 +37,10 @@ export const EventDialog: React.FC<Props> = props => {
     month,
     currentElement,
     dialogIsOpen,
+    inputEventValue,
     handleToggleDialog,
     handleClearCurrentElement,
+    handleUpdateInputEventValue,
   } = props;
   const dayOfWeek =
     DAYS_OF_WEEK[
@@ -64,7 +67,14 @@ export const EventDialog: React.FC<Props> = props => {
       </DialogTitle>
       <DialogContent style={{ width: 400 }}>
         <Events events={currentElement.events} large />
-        <TextField autoFocus id="new-event" label="予定を追加" fullWidth />
+        <TextField
+          autoFocus
+          id="new-event"
+          label="予定を追加"
+          fullWidth
+          value={inputEventValue}
+          onChange={e => handleUpdateInputEventValue(e.target.value)}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleCloseThis}>閉じる</Button>
