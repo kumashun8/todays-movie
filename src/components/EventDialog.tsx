@@ -54,6 +54,7 @@ export const EventDialog: React.FC<Props> = props => {
     handleClearCurrentElement,
     handleUpdateInputEventValue,
     handleAddEvent,
+    handleReomveEvent,
   } = props;
   const dayOfWeek =
     DAYS_OF_WEEK[
@@ -72,6 +73,10 @@ export const EventDialog: React.FC<Props> = props => {
       handleCloseThis();
     }
   };
+  const handleRemoveEventAndClose: (eventId: number) => void = eventId => {
+    handleReomveEvent(eventId);
+    handleCloseThis();
+  };
 
   if (!currentElement) {
     return <div />;
@@ -88,7 +93,12 @@ export const EventDialog: React.FC<Props> = props => {
         <span className={classes.dayOfWeek}>{dayOfWeek}</span>
       </DialogTitle>
       <DialogContent className={classes.content}>
-        <Events events={currentElement.events} large />
+        <Events
+          events={currentElement.events}
+          eventIds={currentElement.eventIds}
+          handleRemove={handleRemoveEventAndClose}
+          large
+        />
         <TextField
           autoFocus
           id="new-event"
