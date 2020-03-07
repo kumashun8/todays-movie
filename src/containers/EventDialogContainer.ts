@@ -5,7 +5,6 @@ import { Dispatch } from 'react';
 import { EventDialog } from 'components/EventDialog';
 import { CalenderElement } from 'lib/calenderElement';
 import { Event } from 'lib/event';
-import { Action } from 'redux';
 
 interface StateAtProps {
   year: number;
@@ -20,7 +19,6 @@ export interface EventDialogHandler {
   handleToggleDialog(): void;
   handleUpdateInputEventValue(inputEventValue: string): void;
   handleAddEvent(newEvent: Event): void;
-  handleReomveEvent(eventId: number): void;
 }
 
 const mapStateToProps = (appState: Appstate): StateAtProps => {
@@ -33,7 +31,7 @@ const mapStateToProps = (appState: Appstate): StateAtProps => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>): EventDialogHandler => {
+const mapDispatchToProps = (dispatch: Dispatch<any>): EventDialogHandler => {
   return {
     handleClearCurrentElement: () => {
       dispatch(CalenderActions.clearCurrentElement());
@@ -46,9 +44,6 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): EventDialogHandler => {
     },
     handleAddEvent: newEvent => {
       dispatch(EventActions.addEvent(newEvent));
-    },
-    handleReomveEvent: eventId => {
-      dispatch(EventActions.removeEvent(eventId));
     },
   };
 };

@@ -40,10 +40,6 @@ export const Reducer = reducerWithInitialState(initialState)
   .case(EventActions.addEvent, (state, newEvent) => {
     return { ...state, events: [...state.events, newEvent] };
   })
-  .case(EventActions.removeEvent, (state, eventId) => {
-    state.events.splice(eventId, 1);
-    return { ...state, events: state.events };
-  })
   .case(EventActions.toggleDialog, state => {
     return { ...state, dialogIsOpen: !state.dialogIsOpen };
   })
