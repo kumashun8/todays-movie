@@ -28,7 +28,7 @@ export class Calender implements Calenderable {
   filterEvents(events: Array<Event>): void {
     this.innerEvents = events
       .filter(n => n.date[0] === this.year && n.date[1] === this.month)
-      .map(m => new InnerEvent(m.date[2], m.value, events.indexOf(m)));
+      .map(m => new InnerEvent(m.date[2], m.value));
   }
   firstDay(): string {
     return String(this.month) + ' 1, ' + String(this.year);
