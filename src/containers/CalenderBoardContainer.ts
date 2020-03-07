@@ -5,7 +5,6 @@ import { CalenderBoard } from 'components/CalenderBoard';
 import { Dispatch } from 'react';
 import { Event } from 'lib/event';
 import { CalenderElement } from 'lib/calenderElement';
-import { Action } from 'redux';
 
 interface StateAtProps {
   year: number;
@@ -29,9 +28,7 @@ const mapStateToProps = (appState: Appstate): StateAtProps => {
   };
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch<Action>
-): CalenderBoardHandler => {
+const mapDispatchToProps = (dispatch: Dispatch<any>): CalenderBoardHandler => {
   return {
     handleChangeMonth: ({ year, month }) => {
       dispatch(CalenderActions.updateCurrentMonth({ year, month }));
