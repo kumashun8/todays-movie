@@ -19,12 +19,13 @@ const useStyles = makeStyles(theme => ({
 
 type Props = {
   events: string[];
+  eventIds?: number[];
   large?: boolean;
 };
 
 export const Events: React.FC<Props> = props => {
   const classes = useStyles();
-  const { events, large = false } = props;
+  const { events, eventIds = [], large = false } = props;
 
   return (
     <div>

@@ -88,7 +88,11 @@ export const EventDialog: React.FC<Props> = props => {
         <span className={classes.dayOfWeek}>{dayOfWeek}</span>
       </DialogTitle>
       <DialogContent className={classes.content}>
-        <Events events={currentElement.events} large />
+        <Events
+          events={currentElement.events}
+          eventIds={currentElement.eventIds}
+          large
+        />
         <TextField
           autoFocus
           id="new-event"
