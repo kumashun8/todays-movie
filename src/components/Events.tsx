@@ -15,9 +15,6 @@ const useStyles = makeStyles(theme => ({
   removeButton: {
     padding: 2,
     color: '#fafafa',
-    [theme.breakpoints.down('xs')]: {
-      marginLeft: -16,
-    },
   },
   counterWrapper: {
     display: 'flex',
