@@ -2,6 +2,7 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { CalenderActions, EventActions } from 'redux/actions';
 import { Event } from 'lib/event';
 import { CalenderElement } from 'lib/calenderElement';
+import { addEventDoc, removeEventDoc } from 'lib/firebase';
 
 export interface State {
   year: number;
@@ -16,13 +17,7 @@ export interface State {
 export const initialState: State = {
   year: 2020,
   month: 3,
-  events: [
-    { date: [2020, 3, 6], value: 'マッドマックス' },
-    { date: [2020, 3, 6], value: '健康診断' },
-    { date: [2020, 3, 15], value: '兄の誕生日' },
-    { date: [2020, 3, 25], value: '学位授与の日だったけどなくなった' },
-    { date: [2020, 4, 3], value: '入社式' },
-  ],
+  events: [],
   dialogIsOpen: false,
   inputEventValue: '',
 };
@@ -38,10 +33,13 @@ export const Reducer = reducerWithInitialState(initialState)
     return { ...state, currentEvents: null };
   })
   .case(EventActions.addEvent, (state, newEvent) => {
+    addEventDoc(newEvent);
     return { ...state, events: [...state.events, newEvent] };
   })
   .case(EventActions.removeEvent, (state, eventId) => {
-    state.events.splice(eventId, 1);
+    const removeIndex = state.events.map(e => e.id).indexOf(eventId);
+    state.events.splice(removeIndex, 1);
+    removeEventDoc(eventId);
     return { ...state, events: state.events };
   })
   .case(EventActions.toggleDialog, state => {

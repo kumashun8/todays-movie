@@ -68,7 +68,11 @@ export const EventDialog: React.FC<Props> = props => {
   const handleCreateAndAddEvent: () => void = () => {
     if (currentElement) {
       handleAddEvent(
-        new Event([year, month, currentElement.date], inputEventValue)
+        new Event(
+          [year, month, currentElement.date],
+          inputEventValue,
+          Date.parse(String(new Date()))
+        )
       );
       handleCloseThis();
     }
