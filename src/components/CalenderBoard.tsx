@@ -8,6 +8,9 @@ import { CalenderBoardHandler } from 'containers/CalenderBoardContainer';
 import { Event } from 'lib/event';
 import { DAYS_OF_WEEK } from 'lib/common';
 import { CalenderElement } from 'lib/calenderElement';
+import { Appstate } from 'redux/store';
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -95,6 +98,12 @@ export const CalenderBoard: React.FC<Props> = props => {
     }
   };
 
+  useFirestoreConnect(['events']);
+  const _events = useSelector(
+    (state: Appstate) => state.firestore.ordered.events
+  );
+
+  console.log(_events);
   return (
     <div className={classes.root}>
       <CalenderHead
