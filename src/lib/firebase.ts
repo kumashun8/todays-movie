@@ -1,6 +1,8 @@
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import { Event } from './event';
+import { Dispatch } from 'react';
+import { EventActions } from 'redux/actions';
 
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -8,8 +10,47 @@ firebase.initializeApp({
   projectId: 'todays-movie',
 });
 
+export type EventDocs = firebase.firestore.QuerySnapshot<
+  firebase.firestore.DocumentData
+>;
+
 const db = firebase.firestore();
 const eventCollection = db.collection('events');
+
+// export async function fetchEventDocs(
+//   successFunc: (
+//     value: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>
+//   ) => void
+// ): Promise<any> {
+//   await eventCollection
+//     .get()
+//     .then(querySnapshot => {
+//       successFunc(querySnapshot);
+//     })
+//     .catch(error => console.log('Error: ', error));
+// }
+
+export function fetchEventDocs() {
+  return (dispatch: Dispatch<any>) => {
+    return new Promise<EventDocs>((resolve, reject) => {
+      dispatch(EventActions.fetchEvents.started({ params: {} }));
+      eventCollection
+        .get()
+        .then(querySnapshot => {
+          dispatch(
+            EventActions.fetchEvents.done({ result: querySnapshot, params: {} })
+          );
+          resolve(querySnapshot);
+        })
+        .catch(error => {
+          dispatch(
+            EventActions.fetchEvents.failed({ error: error, params: {} })
+          );
+          reject(new Error('...'));
+        });
+    });
+  };
+}
 
 export function addEventDoc(event: Event): void {
   eventCollection

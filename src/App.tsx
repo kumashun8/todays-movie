@@ -3,6 +3,16 @@ import CalenderBoardContainer from 'containers/CalenderBoardContainer';
 import { makeStyles } from '@material-ui/core';
 import EventDialogContainer from 'containers/EventDialogContainer';
 
+// function hoge(
+//   value: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>
+// ): void {
+//   const events: [string, firebase.firestore.DocumentData][] = [];
+//   console.log(value.docs);
+//   value.forEach(doc => events.push([doc.id, doc.data()]));
+//   console.log(events);
+// }
+// fetchEventDocs(hoge);
+
 const useStyles = makeStyles(theme => ({
   root: {
     margin: 0,

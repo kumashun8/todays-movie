@@ -1,6 +1,7 @@
 import actionCreatorFactory from 'typescript-fsa';
 import { Event } from 'lib/event';
 import { CalenderElement } from 'lib/calenderElement';
+import { EventDocs } from 'lib/firebase';
 
 const actionCreater = actionCreatorFactory();
 
@@ -14,6 +15,7 @@ export const CalenderActions = {
   clearCurrentElement: actionCreater('CLEAR_CURRENT_ELEMENT'),
 };
 export const EventActions = {
+  fetchEvents: actionCreater.async<{}, EventDocs>('FETCH_EVENTS'),
   addEvent: actionCreater<Event>('ADD_EVENT'),
   removeEvent: actionCreater<number>('REMOVE_EVENT'),
   toggleDialog: actionCreater('TOGGLE_DIALOG'),

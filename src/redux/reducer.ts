@@ -2,7 +2,13 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { CalenderActions, EventActions } from 'redux/actions';
 import { Event } from 'lib/event';
 import { CalenderElement } from 'lib/calenderElement';
-import { addEventDoc, removeEventDoc } from 'lib/firebase';
+import { addEventDoc, removeEventDoc, EventDocs } from 'lib/firebase';
+
+export interface StoreData<T> {
+  data?: T;
+  loading?: boolean;
+  error?: any;
+}
 
 export interface State {
   year: number;
@@ -12,6 +18,7 @@ export interface State {
   currentElement?: CalenderElement;
   currentDay?: number;
   inputEventValue: string;
+  firestore: StoreData<EventDocs>;
 }
 
 export const initialState: State = {
@@ -20,6 +27,9 @@ export const initialState: State = {
   events: [],
   dialogIsOpen: false,
   inputEventValue: '',
+  firestore: {
+    loading: false,
+  },
 };
 
 export const Reducer = reducerWithInitialState(initialState)
@@ -31,6 +41,18 @@ export const Reducer = reducerWithInitialState(initialState)
   })
   .case(CalenderActions.clearCurrentElement, state => {
     return { ...state, currentEvents: null };
+  })
+  .case(EventActions.fetchEvents.started, state => {
+    return { ...state, firestore: { loading: true, error: null } };
+  })
+  .case(EventActions.fetchEvents.done, (state, payload) => {
+    return {
+      ...state,
+      firestore: { data: payload.result, loading: false, error: null },
+    };
+  })
+  .case(EventActions.fetchEvents.failed, (state, payload) => {
+    return { ...state, firestore: { loading: false, error: payload.error } };
   })
   .case(EventActions.addEvent, (state, newEvent) => {
     addEventDoc(newEvent);
