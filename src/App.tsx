@@ -1,7 +1,12 @@
 import * as React from 'react';
-import CalenderBoardContainer from 'containers/CalenderBoardContainer';
+import { Provider } from 'react-redux';
+import { ThemeProvider } from '@material-ui/core';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { makeStyles } from '@material-ui/core';
+import CalenderBoardContainer from 'containers/CalenderBoardContainer';
 import EventDialogContainer from 'containers/EventDialogContainer';
+import store, { rrfProps } from 'redux/store';
+import theme from 'lib/theme';
 
 // function hoge(
 //   value: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>
@@ -28,12 +33,18 @@ const App: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
-      <div className={classes.root}>
-        <CalenderBoardContainer />
-        <EventDialogContainer />
-      </div>
-    </React.Fragment>
+    <Provider store={store}>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <ThemeProvider theme={theme}>
+          <React.Fragment>
+            <div className={classes.root}>
+              <CalenderBoardContainer />
+              <EventDialogContainer />
+            </div>
+          </React.Fragment>
+        </ThemeProvider>
+      </ReactReduxFirebaseProvider>
+    </Provider>
   );
 };
 

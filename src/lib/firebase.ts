@@ -4,11 +4,13 @@ import { Event } from './event';
 import { Dispatch } from 'react';
 import { EventActions } from 'redux/actions';
 
-firebase.initializeApp({
+const fbConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: 'asia-northeast1',
   projectId: 'todays-movie',
-});
+};
+
+firebase.initializeApp(fbConfig);
 
 export type EventDocs = firebase.firestore.QuerySnapshot<
   firebase.firestore.DocumentData
