@@ -1,15 +1,15 @@
 import * as React from 'react';
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
 import { makeStyles, Typography, StyledProps } from '@material-ui/core';
-import { Calender } from 'lib/calender';
 import { grey, red, indigo } from '@material-ui/core/colors';
-import { CalenderCell } from './CalenderCell';
-import { CalenderHead } from './CalenderHead';
-import { CalenderBoardHandler } from 'containers/CalenderBoardContainer';
+import { Calender } from 'lib/calender';
 import { DAYS_OF_WEEK } from 'lib/common';
 import { CalenderElement } from 'lib/calenderElement';
 import { Appstate } from 'redux/store';
-import { useFirestoreConnect } from 'react-redux-firebase';
-import { useSelector } from 'react-redux';
+import { CalenderCell } from './CalenderCell';
+import { CalenderHead } from './CalenderHead';
+import { CalenderBoardHandler } from 'containers/CalenderBoardContainer';
 
 const useStyles = makeStyles(theme => ({
   root: {

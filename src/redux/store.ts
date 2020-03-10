@@ -5,11 +5,11 @@ import thunk from 'redux-thunk';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import { CalenderState, CalenderReducer } from './reducers/calender';
-import { DialogState, DialogReducer } from './reducers/dialog';
 import {
   CalenderElementState,
   CalenderElementReducer,
 } from './reducers/calenderElement';
+import { DialogState, DialogReducer } from './reducers/dialog';
 
 export type Appstate = {
   calender: CalenderState;

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { makeStyles, IconButton, Grid } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
+import { makeStyles, IconButton, Grid, Typography } from '@material-ui/core';
 import { Cancel } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({

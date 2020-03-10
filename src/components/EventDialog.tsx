@@ -8,12 +8,12 @@ import {
   DialogActions,
   Button,
 } from '@material-ui/core';
-import { EventDialogHandler } from 'containers/EventDialogContainer';
 import { CalenderElement } from 'lib/calenderElement';
-import { Events } from './Events';
 import { DAYS_OF_WEEK } from 'lib/common';
 import { Event } from 'lib/event';
 import { addEventDoc, removeEventDoc } from 'lib/firebase';
+import { EventDialogHandler } from 'containers/EventDialogContainer';
+import { Events } from './Events';
 
 const useStyles = makeStyles(theme => ({
   dayOfWeek: {

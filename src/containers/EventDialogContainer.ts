@@ -1,10 +1,11 @@
-import { Appstate } from 'redux/store';
 import { connect } from 'react-redux';
-import { DialogActions, CalenderElementActions } from 'redux/actions';
 import { Dispatch } from 'react';
-import { EventDialog } from 'components/EventDialog';
-import { CalenderElement } from 'lib/calenderElement';
 import { Action } from 'redux';
+import { CalenderElement } from 'lib/calenderElement';
+import { Appstate } from 'redux/store';
+import { EventDialog } from 'components/EventDialog';
+
+import { DialogActions, CalenderElementActions } from 'redux/actions';
 
 interface StateAtProps {
   year: number;

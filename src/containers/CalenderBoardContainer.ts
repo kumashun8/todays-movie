@@ -1,14 +1,14 @@
-import { Appstate } from 'redux/store';
 import { connect } from 'react-redux';
 import {
   CalenderActions,
   DialogActions,
   CalenderElementActions,
 } from 'redux/actions';
-import { CalenderBoard } from 'components/CalenderBoard';
 import { Dispatch } from 'react';
-import { CalenderElement } from 'lib/calenderElement';
 import { Action } from 'redux';
+import { CalenderElement } from 'lib/calenderElement';
+import { Appstate } from 'redux/store';
+import { CalenderBoard } from 'components/CalenderBoard';
 
 interface StateAtProps {
   year: number;

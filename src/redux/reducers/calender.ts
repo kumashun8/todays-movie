@@ -1,6 +1,6 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { CalenderActions } from 'redux/actions';
 import { getNow } from 'lib/common';
+import { CalenderActions } from 'redux/actions';
 
 export interface CalenderState {
   year: number;

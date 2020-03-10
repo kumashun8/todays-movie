@@ -1,6 +1,6 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { CalenderElementActions } from 'redux/actions';
 import { CalenderElement } from 'lib/calenderElement';
+import { CalenderElementActions } from 'redux/actions';
 
 export interface CalenderElementState {
   currentElement?: CalenderElement;
