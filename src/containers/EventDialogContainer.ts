@@ -1,6 +1,6 @@
 import { Appstate } from 'redux/store';
 import { connect } from 'react-redux';
-import { EventActions, CalenderActions } from 'redux/actions';
+import { EventActions, CalenderElementActions } from 'redux/actions';
 import { Dispatch } from 'react';
 import { EventDialog } from 'components/EventDialog';
 import { CalenderElement } from 'lib/calenderElement';
@@ -22,18 +22,18 @@ export interface EventDialogHandler {
 
 const mapStateToProps = (appState: Appstate): StateAtProps => {
   return {
-    year: appState.state.year,
-    month: appState.state.month,
-    currentElement: appState.state.currentElement,
-    dialogIsOpen: appState.state.dialogIsOpen,
-    inputEventValue: appState.state.inputEventValue,
+    year: appState.calender.year,
+    month: appState.calender.month,
+    currentElement: appState.calenderElement.currentElement,
+    dialogIsOpen: appState.event.dialogIsOpen,
+    inputEventValue: appState.event.inputEventValue,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>): EventDialogHandler => {
   return {
     handleClearCurrentElement: () => {
-      dispatch(CalenderActions.clearCurrentElement());
+      dispatch(CalenderElementActions.clearCurrentElement());
     },
     handleToggleDialog: () => {
       dispatch(EventActions.toggleDialog());

@@ -1,13 +1,20 @@
 import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
-import { State, Reducer } from 'redux/reducer';
 import { firebaseReducer, FirebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer, createFirestoreInstance } from 'redux-firestore';
 import thunk from 'redux-thunk';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+import { CalenderState, CalenderReducer } from './reducers/calender';
+import { EventState, EventReducer } from './reducers/event';
+import {
+  CalenderElementState,
+  CalenderElementReducer,
+} from './reducers/calenderElement';
 
 export type Appstate = {
-  state: State;
+  calender: CalenderState;
+  calenderElement: CalenderElementState;
+  event: EventState;
   firebase: FirebaseReducer.Reducer<{}, {}>;
   firestore: any;
 };
@@ -28,7 +35,9 @@ export const eventCollection = db.collection('events');
 
 const store = createStore(
   combineReducers<Appstate>({
-    state: Reducer,
+    calender: CalenderReducer,
+    calenderElement: CalenderElementReducer,
+    event: EventReducer,
     firebase: firebaseReducer,
     firestore: firestoreReducer,
   }),

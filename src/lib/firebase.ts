@@ -1,11 +1,6 @@
-import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import { Event } from './event';
 import { eventCollection } from 'redux/store';
-
-export type EventDocs = firebase.firestore.QuerySnapshot<
-  firebase.firestore.DocumentData
->;
 
 export function addEventDoc(event: Event): void {
   eventCollection

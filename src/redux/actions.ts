@@ -7,6 +7,9 @@ export const CalenderActions = {
   updateCurrentMonth: actionCreater<{ year: number; month: number }>(
     'UPDATE_CURRENT_MONTH'
   ),
+};
+
+export const CalenderElementActions = {
   updateCurrentElement: actionCreater<CalenderElement>(
     'UPDATE_CURRENT_ELEMENT'
   ),
