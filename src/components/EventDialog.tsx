@@ -37,7 +37,7 @@ interface OwnProps {
   year: number;
   month: number;
   currentElement?: CalenderElement;
-  dialogIsOpen: boolean;
+  isOpen: boolean;
   inputEventValue: string;
 }
 
@@ -49,7 +49,7 @@ export const EventDialog: React.FC<Props> = props => {
     year,
     month,
     currentElement,
-    dialogIsOpen,
+    isOpen,
     inputEventValue,
     handleToggleDialog,
     handleClearCurrentElement,
@@ -87,7 +87,7 @@ export const EventDialog: React.FC<Props> = props => {
 
   return (
     <Dialog
-      open={dialogIsOpen}
+      open={isOpen}
       onClose={handleCloseThis}
       aria-labelledby="event-dialog"
     >

@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import { CalenderState, CalenderReducer } from './reducers/calender';
-import { EventState, EventReducer } from './reducers/event';
+import { DialogState, DialogReducer } from './reducers/dialog';
 import {
   CalenderElementState,
   CalenderElementReducer,
@@ -14,7 +14,7 @@ import {
 export type Appstate = {
   calender: CalenderState;
   calenderElement: CalenderElementState;
-  event: EventState;
+  dialog: DialogState;
   firebase: FirebaseReducer.Reducer<{}, {}>;
   firestore: any;
 };
@@ -22,11 +22,13 @@ export type Appstate = {
 const storeEnhancers =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 const fbConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: 'asia-northeast1',
   projectId: 'todays-movie',
+};
+const rrfConfig = {
+  userProfile: 'users',
 };
 
 firebase.initializeApp(fbConfig);
@@ -37,16 +39,12 @@ const store = createStore(
   combineReducers<Appstate>({
     calender: CalenderReducer,
     calenderElement: CalenderElementReducer,
-    event: EventReducer,
+    dialog: DialogReducer,
     firebase: firebaseReducer,
     firestore: firestoreReducer,
   }),
   storeEnhancers(applyMiddleware(thunk))
 );
-
-const rrfConfig = {
-  userProfile: 'users',
-};
 
 export const rrfProps = {
   firebase,

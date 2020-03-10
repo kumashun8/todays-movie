@@ -2,7 +2,7 @@ import { Appstate } from 'redux/store';
 import { connect } from 'react-redux';
 import {
   CalenderActions,
-  EventActions,
+  DialogActions,
   CalenderElementActions,
 } from 'redux/actions';
 import { CalenderBoard } from 'components/CalenderBoard';
@@ -13,7 +13,7 @@ import { Action } from 'redux';
 interface StateAtProps {
   year: number;
   month: number;
-  dialogIsOpen: boolean;
+  isOpen: boolean;
 }
 
 export interface CalenderBoardHandler {
@@ -26,7 +26,7 @@ const mapStateToProps = (appState: Appstate): StateAtProps => {
   return {
     year: appState.calender.year,
     month: appState.calender.month,
-    dialogIsOpen: appState.event.dialogIsOpen,
+    isOpen: appState.dialog.isOpen,
   };
 };
 
@@ -41,7 +41,7 @@ const mapDispatchToProps = (
       dispatch(CalenderElementActions.updateCurrentElement(currentEvents));
     },
     handleToggleDialog: () => {
-      dispatch(EventActions.toggleDialog());
+      dispatch(DialogActions.toggleDialog());
     },
   };
 };
