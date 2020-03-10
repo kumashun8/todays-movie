@@ -1,17 +1,19 @@
-import { Appstate } from 'redux/store';
 import { connect } from 'react-redux';
-import { CalenderActions, EventActions } from 'redux/actions';
-import { CalenderBoard } from 'components/CalenderBoard';
+import {
+  CalenderActions,
+  DialogActions,
+  CalenderElementActions,
+} from 'redux/actions';
 import { Dispatch } from 'react';
-import { Event } from 'lib/event';
-import { CalenderElement } from 'lib/calenderElement';
 import { Action } from 'redux';
+import { CalenderElement } from 'lib/calenderElement';
+import { Appstate } from 'redux/store';
+import { CalenderBoard } from 'components/CalenderBoard';
 
 interface StateAtProps {
   year: number;
   month: number;
-  events: Array<Event>;
-  dialogIsOpen: boolean;
+  isOpen: boolean;
 }
 
 export interface CalenderBoardHandler {
@@ -22,10 +24,9 @@ export interface CalenderBoardHandler {
 
 const mapStateToProps = (appState: Appstate): StateAtProps => {
   return {
-    year: appState.state.year,
-    month: appState.state.month,
-    events: appState.state.events,
-    dialogIsOpen: appState.state.dialogIsOpen,
+    year: appState.calender.year,
+    month: appState.calender.month,
+    isOpen: appState.dialog.isOpen,
   };
 };
 
@@ -37,10 +38,10 @@ const mapDispatchToProps = (
       dispatch(CalenderActions.updateCurrentMonth({ year, month }));
     },
     handleSelectElement: currentEvents => {
-      dispatch(CalenderActions.updateCurrentElement(currentEvents));
+      dispatch(CalenderElementActions.updateCurrentElement(currentEvents));
     },
     handleToggleDialog: () => {
-      dispatch(EventActions.toggleDialog());
+      dispatch(DialogActions.toggleDialog());
     },
   };
 };

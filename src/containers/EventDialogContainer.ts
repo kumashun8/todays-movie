@@ -1,17 +1,17 @@
-import { Appstate } from 'redux/store';
 import { connect } from 'react-redux';
-import { EventActions, CalenderActions } from 'redux/actions';
 import { Dispatch } from 'react';
-import { EventDialog } from 'components/EventDialog';
-import { CalenderElement } from 'lib/calenderElement';
-import { Event } from 'lib/event';
 import { Action } from 'redux';
+import { CalenderElement } from 'lib/calenderElement';
+import { Appstate } from 'redux/store';
+import { EventDialog } from 'components/EventDialog';
+
+import { DialogActions, CalenderElementActions } from 'redux/actions';
 
 interface StateAtProps {
   year: number;
   month: number;
   currentElement?: CalenderElement;
-  dialogIsOpen: boolean;
+  isOpen: boolean;
   inputEventValue: string;
 }
 
@@ -19,36 +19,32 @@ export interface EventDialogHandler {
   handleClearCurrentElement(): void;
   handleToggleDialog(): void;
   handleUpdateInputEventValue(inputEventValue: string): void;
-  handleAddEvent(newEvent: Event): void;
-  handleReomveEvent(eventId: number): void;
+  handleClearInputEventValue(): void;
 }
 
 const mapStateToProps = (appState: Appstate): StateAtProps => {
   return {
-    year: appState.state.year,
-    month: appState.state.month,
-    currentElement: appState.state.currentElement,
-    dialogIsOpen: appState.state.dialogIsOpen,
-    inputEventValue: appState.state.inputEventValue,
+    year: appState.calender.year,
+    month: appState.calender.month,
+    currentElement: appState.calenderElement.currentElement,
+    isOpen: appState.dialog.isOpen,
+    inputEventValue: appState.dialog.inputEventValue,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>): EventDialogHandler => {
   return {
     handleClearCurrentElement: () => {
-      dispatch(CalenderActions.clearCurrentElement());
+      dispatch(CalenderElementActions.clearCurrentElement());
     },
     handleToggleDialog: () => {
-      dispatch(EventActions.toggleDialog());
+      dispatch(DialogActions.toggleDialog());
     },
     handleUpdateInputEventValue: inputEventValue => {
-      dispatch(EventActions.updateInputEventValue(inputEventValue));
+      dispatch(DialogActions.updateInputEventValue(inputEventValue));
     },
-    handleAddEvent: newEvent => {
-      dispatch(EventActions.addEvent(newEvent));
-    },
-    handleReomveEvent: eventId => {
-      dispatch(EventActions.removeEvent(eventId));
+    handleClearInputEventValue: () => {
+      dispatch(DialogActions.clearInputEventValue());
     },
   };
 };

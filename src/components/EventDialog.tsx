@@ -8,11 +8,12 @@ import {
   DialogActions,
   Button,
 } from '@material-ui/core';
-import { EventDialogHandler } from 'containers/EventDialogContainer';
 import { CalenderElement } from 'lib/calenderElement';
-import { Events } from './Events';
 import { DAYS_OF_WEEK } from 'lib/common';
 import { Event } from 'lib/event';
+import { addEventDoc, removeEventDoc } from 'lib/firestore';
+import { EventDialogHandler } from 'containers/EventDialogContainer';
+import { Events } from './Events';
 
 const useStyles = makeStyles(theme => ({
   dayOfWeek: {
@@ -36,7 +37,7 @@ interface OwnProps {
   year: number;
   month: number;
   currentElement?: CalenderElement;
-  dialogIsOpen: boolean;
+  isOpen: boolean;
   inputEventValue: string;
 }
 
@@ -48,13 +49,12 @@ export const EventDialog: React.FC<Props> = props => {
     year,
     month,
     currentElement,
-    dialogIsOpen,
+    isOpen,
     inputEventValue,
     handleToggleDialog,
     handleClearCurrentElement,
     handleUpdateInputEventValue,
-    handleAddEvent,
-    handleReomveEvent,
+    handleClearInputEventValue,
   } = props;
   const dayOfWeek =
     DAYS_OF_WEEK[
@@ -62,19 +62,23 @@ export const EventDialog: React.FC<Props> = props => {
     ];
   const handleCloseThis: () => void = () => {
     handleClearCurrentElement();
-    handleUpdateInputEventValue('');
+    handleClearInputEventValue();
     handleToggleDialog();
   };
   const handleCreateAndAddEvent: () => void = () => {
     if (currentElement) {
-      handleAddEvent(
-        new Event([year, month, currentElement.date], inputEventValue)
+      addEventDoc(
+        new Event(
+          [year, month, currentElement.date],
+          inputEventValue,
+          Date.parse(String(new Date()))
+        )
       );
       handleCloseThis();
     }
   };
   const handleRemoveEventAndClose: (eventId: number) => void = eventId => {
-    handleReomveEvent(eventId);
+    removeEventDoc(eventId);
     handleCloseThis();
   };
 
@@ -84,7 +88,7 @@ export const EventDialog: React.FC<Props> = props => {
 
   return (
     <Dialog
-      open={dialogIsOpen}
+      open={isOpen}
       onClose={handleCloseThis}
       aria-labelledby="event-dialog"
     >

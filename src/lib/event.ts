@@ -1,6 +1,7 @@
 interface Eventable {
   readonly date: [number, number, number];
   readonly value: string;
+  readonly id: number;
 }
 
 export interface InnerEventable {
@@ -12,7 +13,8 @@ export interface InnerEventable {
 export class Event implements Eventable {
   constructor(
     readonly date: [number, number, number],
-    readonly value: string
+    readonly value: string,
+    readonly id = 0
   ) {}
 }
 
