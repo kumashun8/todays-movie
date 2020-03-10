@@ -19,6 +19,7 @@ export interface EventDialogHandler {
   handleClearCurrentElement(): void;
   handleToggleDialog(): void;
   handleUpdateInputEventValue(inputEventValue: string): void;
+  handleClearInputEventValue(): void;
 }
 
 const mapStateToProps = (appState: Appstate): StateAtProps => {
@@ -41,6 +42,9 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): EventDialogHandler => {
     },
     handleUpdateInputEventValue: inputEventValue => {
       dispatch(DialogActions.updateInputEventValue(inputEventValue));
+    },
+    handleClearInputEventValue: () => {
+      dispatch(DialogActions.clearInputEventValue());
     },
   };
 };

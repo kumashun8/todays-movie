@@ -17,4 +17,7 @@ export const DialogReducer = reducerWithInitialState(initialState)
   })
   .case(DialogActions.updateInputEventValue, (state, inputEventValue) => {
     return { ...state, inputEventValue };
+  })
+  .case(DialogActions.clearInputEventValue, state => {
+    return { ...state, inputEventValue: '' };
   });

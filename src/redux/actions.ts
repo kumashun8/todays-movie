@@ -19,4 +19,5 @@ export const CalenderElementActions = {
 export const DialogActions = {
   toggleDialog: actionCreater('TOGGLE_DIALOG'),
   updateInputEventValue: actionCreater<string>('UPDATE_INPUT_EVENT_VALUE'),
+  clearInputEventValue: actionCreater('CLEAR_INPUT_EVENT_VALUE'),
 };

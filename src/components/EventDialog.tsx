@@ -54,6 +54,7 @@ export const EventDialog: React.FC<Props> = props => {
     handleToggleDialog,
     handleClearCurrentElement,
     handleUpdateInputEventValue,
+    handleClearInputEventValue,
   } = props;
   const dayOfWeek =
     DAYS_OF_WEEK[
@@ -61,7 +62,7 @@ export const EventDialog: React.FC<Props> = props => {
     ];
   const handleCloseThis: () => void = () => {
     handleClearCurrentElement();
-    handleUpdateInputEventValue('');
+    handleClearInputEventValue();
     handleToggleDialog();
   };
   const handleCreateAndAddEvent: () => void = () => {
