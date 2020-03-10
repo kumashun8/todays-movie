@@ -5,7 +5,6 @@ import { grey, red, indigo } from '@material-ui/core/colors';
 import { CalenderCell } from './CalenderCell';
 import { CalenderHead } from './CalenderHead';
 import { CalenderBoardHandler } from 'containers/CalenderBoardContainer';
-import { Event } from 'lib/event';
 import { DAYS_OF_WEEK } from 'lib/common';
 import { CalenderElement } from 'lib/calenderElement';
 import { Appstate } from 'redux/store';
@@ -69,7 +68,6 @@ const useStyles = makeStyles(theme => ({
 interface OwnProps {
   year: number;
   month: number;
-  events: Array<Event>;
 }
 
 type Props = OwnProps & CalenderBoardHandler;
@@ -79,11 +77,16 @@ export const CalenderBoard: React.FC<Props> = props => {
   const {
     year,
     month,
-    events,
     handleChangeMonth,
     handleSelectElement,
     handleToggleDialog,
   } = props;
+
+  useFirestoreConnect([{ collection: 'events' }]);
+  const events = useSelector(
+    (state: Appstate) => state.firestore.ordered.events
+  );
+
   const calender = Calender.getInstance(year, month, events);
   const handleChangeToPrevMonth: () => void = () => {
     handleChangeMonth(calender.prevMonth());
@@ -97,13 +100,6 @@ export const CalenderBoard: React.FC<Props> = props => {
       handleToggleDialog();
     }
   };
-
-  useFirestoreConnect(['events']);
-  const _events = useSelector(
-    (state: Appstate) => state.firestore.ordered.events
-  );
-
-  console.log(_events);
   return (
     <div className={classes.root}>
       <CalenderHead

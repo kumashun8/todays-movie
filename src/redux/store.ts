@@ -1,6 +1,6 @@
 import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
 import { State, Reducer } from 'redux/reducer';
-import { firebaseReducer } from 'react-redux-firebase';
+import { firebaseReducer, FirebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer, createFirestoreInstance } from 'redux-firestore';
 import thunk from 'redux-thunk';
 import * as firebase from 'firebase/app';
@@ -8,7 +8,7 @@ import 'firebase/firestore';
 
 export type Appstate = {
   state: State;
-  firebase: any;
+  firebase: FirebaseReducer.Reducer<{}, {}>;
   firestore: any;
 };
 
@@ -35,7 +35,9 @@ const store = createStore(
   storeEnhancers(applyMiddleware(thunk))
 );
 
-const rrfConfig = {};
+const rrfConfig = {
+  userProfile: 'users',
+};
 
 export const rrfProps = {
   firebase,
