@@ -11,7 +11,7 @@ import {
 import { CalenderElement } from 'lib/calenderElement';
 import { DAYS_OF_WEEK } from 'lib/common';
 import { Event } from 'lib/event';
-import { addEventDoc, removeEventDoc } from 'lib/firebase';
+import { addEventDoc, removeEventDoc } from 'lib/firestore';
 import { EventDialogHandler } from 'containers/EventDialogContainer';
 import { Events } from './Events';
 
