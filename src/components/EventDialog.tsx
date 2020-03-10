@@ -13,6 +13,7 @@ import { CalenderElement } from 'lib/calenderElement';
 import { Events } from './Events';
 import { DAYS_OF_WEEK } from 'lib/common';
 import { Event } from 'lib/event';
+import { addEventDoc, removeEventDoc } from 'lib/firebase';
 
 const useStyles = makeStyles(theme => ({
   dayOfWeek: {
@@ -53,8 +54,6 @@ export const EventDialog: React.FC<Props> = props => {
     handleToggleDialog,
     handleClearCurrentElement,
     handleUpdateInputEventValue,
-    handleAddEvent,
-    handleReomveEvent,
   } = props;
   const dayOfWeek =
     DAYS_OF_WEEK[
@@ -67,7 +66,7 @@ export const EventDialog: React.FC<Props> = props => {
   };
   const handleCreateAndAddEvent: () => void = () => {
     if (currentElement) {
-      handleAddEvent(
+      addEventDoc(
         new Event(
           [year, month, currentElement.date],
           inputEventValue,
@@ -78,7 +77,7 @@ export const EventDialog: React.FC<Props> = props => {
     }
   };
   const handleRemoveEventAndClose: (eventId: number) => void = eventId => {
-    handleReomveEvent(eventId);
+    removeEventDoc(eventId);
     handleCloseThis();
   };
 
